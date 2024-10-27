@@ -1,3 +1,3 @@
 # portfolio
 
-{% include /root/repos.html %}
+{% include_relative repos.html %}
