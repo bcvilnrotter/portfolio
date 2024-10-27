@@ -2,6 +2,7 @@ import os
 import requests
 
 current_repo_name = os.getenv('GITHUB_REPOSITORY','bcvilnrotter/portfolio').split('/')[1]
+print(current_repo_name)
 
 # Fetch repositories from GitHub API
 response = requests.get("https://api.github.com/users/bcvilnrotter/repos")
