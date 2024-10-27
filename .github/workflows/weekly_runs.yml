@@ -23,3 +23,13 @@ jobs:
 
             - name: Run the script
               run: python update_repos.py
+
+            - name: Commit and push changes
+              run: |
+                git config --global user.name 'GitHub Actions'
+                git config --global user.name 'actions@github.com'
+                git add repos.html
+                git commit -m "Update repos.html"
+                git push
+              env:
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
