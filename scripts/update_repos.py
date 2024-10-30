@@ -21,7 +21,7 @@ for repo in repos:
 html_content += "</div></body></html>"
 
 # Write the HTML content to a file
-with open("repos.html","w") as file:
+with open("_data/repos.html","w") as file:
     file.write(html_content)
 
 # Print the success command to console
