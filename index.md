@@ -37,7 +37,7 @@ Before embarking on this journey I thought it would be novel for me to track job
                 data: labels.map(date => {
                     const entry = data.find(
                         item => item.relation_name === relation && new Date(item.sent_time).toLocaleDateString() === date);
-                    return entry ? parseFlost(entry.value) : 0;
+                    return entry ? parseFloat(entry.value) : 0;
                 })
             };
         })
