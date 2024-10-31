@@ -14,7 +14,6 @@ Before embarking on this journey I thought it would be novel for me to track job
 <script>
     document.addEventListener("DOMContentLoaded",function() {
         const data = {{ site.data.email_trends | jsonify }};
-        
         const labels = [...new Set(data.map(item => new Date(item.sent_time).toLocaleDateString()))];
         const datasets = [
             { label: 'Relation 1', backgroundColor: 'rgba(75, 192, 192, 0.6)', data: data.filter(item => item.relation_name === "Relation 1").map(item => parseFloat(item.value)) },
@@ -24,7 +23,6 @@ Before embarking on this journey I thought it would be novel for me to track job
             { label: 'Relation 5', backgroundColor: 'rgba(153, 102, 255, 0.6)', data: data.filter(item => item.relation_name === "Relation 5").map(item => parseFloat(item.value)) },
             { label: 'Relation 6', backgroundColor: 'rgba(255, 159, 64, 0.6)', data: data.filter(item => item.relation_name === "Relation 6").map(item => parseFloat(item.value)) }
         ];
-    
         new Chart(document.getElementById("myChart"), {
             type: 'bar',
             data: { labels: labels, datasets: datasets },
@@ -33,6 +31,6 @@ Before embarking on this journey I thought it would be novel for me to track job
                         plugins: { legend: { position: 'top' }, tooltip: { mode: 'index', intersect: false } },
                         scales: { x: { stacked: true }, y: { stacked: true } }         
             }
-        });        
-    });
+        });
+    });        
 </script>
