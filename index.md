@@ -28,7 +28,7 @@ Before embarking on this journey I thought it would be novel for me to track job
         // Get unique relation names from data
         const uniqueRelations = [...new Set(data.map(item => item.relation_name))];
         // Collect all unique dates in sorted order
-        const labels = [...new Set(data.map(item => new Date(item.sent_time).toLocaleDateString()))].sort((a,b) => new Date(a) - new Date(b));
+        const labels = [...new Set(data.map(item => new Date(item.sent_time).toLocaleDateString()))];
         // Generate datasets for each relation dynamically
         const datasets = uniqueRelations.map((relation,index) => {
             return {
