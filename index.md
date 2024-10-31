@@ -16,45 +16,31 @@ Before embarking on this journey I thought it would be novel for me to track job
         const data = {{ site.data.email_trends | jsonify }};
         //Log data to ensure it loads correctly
         console.log("Data:",data);
+        // Define colors for each relation
+        const colors = [
+            'rgba(75,192,192,0.6)',     // Teal
+            'rgba(255, 99, 132, 0.6)',  // Red
+            'rgba(54, 162, 235, 0.6)',  // Blue
+            'rgba(255, 206, 86, 0.6)',  // Yellow
+            'rgba(153, 102, 255, 0.6)', // Purple
+            'rgba(255, 159, 64, 0.6)'   // Orange            
+        ]
+        // Get unique relation names from data
+        cons uniqueRelations = [...new Set(data.map(item => item.relation_name))];
         // Collect all unique dates in sorted order
         const labels = [...new Set(data.map(item => new Date(item.sent_time).toLocaleDateString()))].sort((a,b) => new Date(a) - new Date(b));
-        const datasets = [{ label: 'Relation 1', backgroundColor: 'rgba(75, 192, 192, 0.6)', 
-            data: labels.map(date => {
-                const entry = data.find(
-                    item => item.relation_name === "Relation 1" && new Date(item.sent_time).toLocaleDateString() === date
-                ); return entry ? parseFloat(entry.value) // Use 0 if no entry exists
-            })},
-            { label: 'Relation 2', backgroundColor: 'rgba(255, 99, 132, 0.6)', 
-            data: labels.map(date => {
-                const entry = data.find(
-                    item => item.relation_name === "Relation 2" && new Date(item.sent_time).toLocaleDateString() === date
-                ); return entry ? parseFloat(entry.value) // Use 0 if no entry exists
-            })},
-            { label: 'Relation 3', backgroundColor: 'rgba(54, 162, 235, 0.6)', 
-            data: labels.map(date => {
-                const entry = data.find(
-                    item => item.relation_name === "Relation 3" && new Date(item.sent_time).toLocaleDateString() === date
-                ); return entry ? parseFloat(entry.value) // Use 0 if no entry exists
-            })},
-            { label: 'Relation 4', backgroundColor: 'rgba(255, 206, 86, 0.6)', 
-            data: labels.map(date => {
-                const entry = data.find(
-                    item => item.relation_name === "Relation 4" && new Date(item.sent_time).toLocaleDateString() === date
-                ); return entry ? parseFloat(entry.value) // Use 0 if no entry exists
-            })},
-            { label: 'Relation 5', backgroundColor: 'rgba(153, 102, 255, 0.6)', 
-            data: labels.map(date => {
-                const entry = data.find(
-                    item => item.relation_name === "Relation 5" && new Date(item.sent_time).toLocaleDateString() === date
-                ); return entry ? parseFloat(entry.value) // Use 0 if no entry exists
-            })},
-            { label: 'Relation 6', backgroundColor: 'rgba(255, 159, 64, 0.6)', 
-            data: labels.map(date => {
-                const entry = data.find(
-                    item => item.relation_name === "Relation 6" && new Date(item.sent_time).toLocaleDateString() === date
-                ); return entry ? parseFloat(entry.value) // Use 0 if no entry exists
-            })}
-        ];
+        // Generate datasets for each relation dynamically
+        const datasets = uniqueRelations.map((relation,index) => {
+            return {
+                label: relation,
+                backgroundColor: colors[index % colors.length],
+                data: labels.map(date => {
+                    const entry = data.find(
+                        item => item.relation_name === relation && new Date(item.sent_time).toLocaleDateString() === date);
+                    return entry ? parseFlost(entry.value) : 0;
+                })
+            };
+        })
         // Log labels and dataset values for debugging
         console.log("Labels:",labels);
         console.log("Datasets:",datasets);
@@ -68,7 +54,5 @@ Before embarking on this journey I thought it would be novel for me to track job
                         scales: { x: { stacked: true }, y: { stacked: true } }         
             }
         });
-    });        
-        });
-    });        
+    });       
 </script>
