@@ -1,5 +1,9 @@
 [
   {
+    "sent_time": "2024-10-31T12:02:00.000-04:00",
+    "relation_id": "No Email Trend"
+  },
+  {
     "sent_time": "2024-10-31T11:24:00.000-04:00",
     "relation_id": "No Email Trend"
   },
@@ -394,9 +398,5 @@
   {
     "sent_time": "2024-10-29T11:55:00.000-04:00",
     "relation_id": "received"
-  },
-  {
-    "sent_time": "2024-10-29T11:51:00.000-04:00",
-    "relation_id": "No Email Trend"
   }
 ]
