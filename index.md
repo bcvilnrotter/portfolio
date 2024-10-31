@@ -55,6 +55,10 @@ Before embarking on this journey I thought it would be novel for me to track job
                 ); return entry ? parseFloat(entry.value) // Use 0 if no entry exists
             })}
         ];
+        // Log labels and dataset values for debugging
+        console.log("Labels:",labels);
+        console.log("Datasets:",datasets);
+        // Make the chart
         new Chart(document.getElementById("myChart"), {
             type: 'bar',
             data: { labels: labels, datasets: datasets },
