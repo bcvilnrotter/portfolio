@@ -24,7 +24,7 @@ Before embarking on this journey I thought it would be novel for me to track job
             'rgba(255, 206, 86, 0.6)',  // Yellow
             'rgba(153, 102, 255, 0.6)', // Purple
             'rgba(255, 159, 64, 0.6)'   // Orange            
-        ]
+        ];
         // Get unique relation names from data
         const uniqueRelations = [...new Set(data.map(item => item.relation_id))];
         // Collect all unique dates in sorted order
