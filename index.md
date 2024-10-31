@@ -69,4 +69,6 @@ Before embarking on this journey I thought it would be novel for me to track job
             }
         });
     });        
+        });
+    });        
 </script>
