@@ -12,7 +12,7 @@ Before embarking on this journey I thought it would be novel for me to track job
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    const data = {{ site.data.records | jsonify }};
+    const data = {{ site.data.email_trends | jsonify }};
     
     const labels = [...new Set(data.map(item => item.sent_time))];
     const datasets = [
