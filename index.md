@@ -35,9 +35,9 @@ Before embarking on this journey I thought it would be novel for me to track job
                 label: relation,
                 backgroundColor: colors[index % colors.length],
                 data: labels.map(date => {
-                    const entry = data.find(
-                        item => item.relation_id === relation && new Date(item.sent_time).toLocaleDateString() === date);
-                    return entry ? parseFloat(entry.value) : 0;
+                    const entry = data.find(item => item.relation_id === relation && new Date(item.sent_time).toISOString().split('T')[0] === date);
+                    // Use 0 if entry is missing or value is not a valid number
+                    return entry && ! isNaN(parseFloat(entry.value)) ? parseFloat(entry.value)
                 })
             };
         })
