@@ -14,7 +14,7 @@ Before embarking on this journey I thought it would be novel for me to track job
 <script>
     const data = {{ site.data.email_trends | jsonify }};
     
-    const labels = [...new Set(data.map(item => new Date(item.sent_time).toLocalDateString()))];
+    const labels = [...new Set(data.map(item => new Date(item.sent_time).toLocaleDateString()))];
     const datasets = [
         { label: 'Relation 1', backgroundColor: 'rgba(75, 192, 192, 0.6)', data: data.filter(item => item.relation_name === "Relation 1").map(item => parseFloat(item.value)) },
         { label: 'Relation 2', backgroundColor: 'rgba(255, 99, 132, 0.6)', data: data.filter(item => item.relation_name === "Relation 2").map(item => parseFloat(item.value)) },
