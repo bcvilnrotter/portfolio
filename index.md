@@ -26,7 +26,7 @@ Before embarking on this journey I thought it would be novel for me to track job
             'rgba(255, 159, 64, 0.6)'   // Orange            
         ]
         // Get unique relation names from data
-        const uniqueRelations = [...new Set(data.map(item => item.relation_name))];
+        const uniqueRelations = [...new Set(data.map(item => item.relation_id))];
         // Collect all unique dates in sorted order
         const labels = [...new Set(data.map(item => new Date(item.sent_time).toLocaleDateString()))];
         // Generate datasets for each relation dynamically
@@ -36,7 +36,7 @@ Before embarking on this journey I thought it would be novel for me to track job
                 backgroundColor: colors[index % colors.length],
                 data: labels.map(date => {
                     const entry = data.find(
-                        item => item.relation_name === relation && new Date(item.sent_time).toLocaleDateString() === date);
+                        item => item.relation_id === relation && new Date(item.sent_time).toLocaleDateString() === date);
                     return entry ? parseFloat(entry.value) : 0;
                 })
             };
