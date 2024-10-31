@@ -41,7 +41,7 @@ Before embarking on this journey I thought it would be novel for me to track job
                     return entry && !isNaN(parseFloat(entry.value)) ? parseFloat(entry.value)
                 })
             };
-        })
+        });
         // Log labels and dataset values for debugging
         console.log("Labels:",labels);
         console.log("Datasets:",datasets);
