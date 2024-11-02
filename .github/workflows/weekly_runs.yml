@@ -19,7 +19,7 @@ jobs:
             - name: Install dependencies
               run: |
                 python -m pip install --upgrade pip
-                pip install requests
+                pip install -r requirements.txt
 
             - name: Run the script
               run: python scripts\update_repos.py
@@ -33,3 +33,10 @@ jobs:
                 git push
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            
+            - name: Run update_email_trends scripts
+              env:
+                NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+                DATABASE_ID: ${{ secrets.NOTION_EMAIL_TRENDS_DBID }}
+              run: |
+                python update_email_trends.py
