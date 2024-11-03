@@ -28,7 +28,7 @@ jobs:
             - name: Run update_email_trends scripts
               env:
                 NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
-                DATABASE_ID: ${{ secrets.NOTION_EMAIL_TRENDS_DBID }}
+                NOTION_EMAIL_TRENDS_DBID: ${{ secrets.NOTION_EMAIL_TRENDS_DBID }}
               run: |
                 python scripts/update_email_trends.py
 
