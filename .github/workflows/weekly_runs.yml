@@ -22,7 +22,7 @@ jobs:
                 python -m pip install --upgrade pip
                 pip install -r requirements.txt
 
-            - name: Run the script
+            - name: Run udate_repos.py
               run: python scripts/update_repos.py
 
             - name: Run update_email_trends scripts
@@ -30,7 +30,7 @@ jobs:
                 NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
                 DATABASE_ID: ${{ secrets.NOTION_EMAIL_TRENDS_DBID }}
               run: |
-                python update_email_trends.py
+                python scripts/update_email_trends.py
 
             - name: Commit and push changes
               run: |
