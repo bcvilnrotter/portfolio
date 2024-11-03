@@ -4,8 +4,6 @@ title: Home
 ---
 
 # Purpose
-The purpose of this page is to show off my current Github repos as well as other data visualization projects that can show off my ability and expertise in the field. I'm a Senior Incident Response Analyst that has a decades worth of experience in the Digital Forensics / Incident Response (DFIR) field, currently pivoting to a career path that is more focused on programming in the Data Science and AI / Machine Learning space.
-
 Before embarking on this journey I thought it would be novel for me to track job applications through data visualizations. As I was going to online classes and filling in skill gaps, or remapping skills I already gained in my decades long career, I figured it would be beneficial for me to track my progress in my job search through data.
 
 <canvas id="myChart" width="400" height="200"></canvas>
