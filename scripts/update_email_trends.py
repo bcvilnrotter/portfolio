@@ -50,17 +50,29 @@ def process_pages(data,headers):
     
     return filtered_data
 
-def main():
-    url = f"https://api.notion.com/v1/databases/{get_secret('NOTION_EMAIL_TRENDS_DBID')}/query"
+# function to display secrets in github actions
+def print_secret(name,secret):
+    if secret:
+        print(f'{name} collected: ' + '*'* len(secret))
+    else:
+        print(f'{name} not retrieved.')
 
+def main():
+    # pull secrets an initialize variables
+    notion_dbid = print_secret(get_secret('NOTION_EMAIL_TRENDS_DBID'))
+    notion_token = print_secret(get_secret('NOTION_TOKEN'))
+    
+    
+    url = f"https://api.notion.com/v1/databases/{notion_dbid}/query"
     headers = {
-        "Authorization": f"Bearer {get_secret('NOTION_TOKEN')}",
+        "Authorization": f"Bearer {notion_token}",
         "Content-Type": "application/json",
         "Notion-Version": "2022-06-28"
     }
 
     # collect and process data
     filtered_data = process_pages(fetch_all_pages(url,headers),headers)
+    print(f"Collected and processed records from {len(filtered_data)} pages.")
 
     # write the collected data to file
     with open('_data/email_trends.json','w') as f:
