@@ -1,6 +1,6 @@
 ---
 layout: default
-title: My Journey
+title: "My Journey"
 permalink: /journey/
 
 # My Journey
