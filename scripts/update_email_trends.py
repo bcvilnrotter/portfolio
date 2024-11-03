@@ -21,6 +21,7 @@ def fetch_all_pages(url,headers):
         has_more = data.get('has_more',False)
         next_cursor = data.get('next_cursor')
 
+    print(f'Collected {len(all_pages)} pages from the identified database.')
     return all_pages
 
 # function to process the data collected
@@ -61,7 +62,6 @@ def main():
 
     # collect and process data
     filtered_data = process_pages(fetch_all_pages(url,headers),headers)
-    print(f"Collected and processed records from {len(filtered_data)} pages.")
 
     # write the collected data to file
     with open('_data/email_trends.json','w') as f:
