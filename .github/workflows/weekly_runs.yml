@@ -29,7 +29,7 @@ jobs:
               run: |
                 git config --global user.name 'GitHub Actions'
                 git config --global user.name 'actions@github.com'
-                git add repos.html
+                git add _data/repos.html
                 git commit -m "Update repos.html"
                 git push
               env:
