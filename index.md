@@ -10,5 +10,5 @@ This site is a work in progress, and is still being actively built out, but for 
 
 <nav>
     <a href="/">Home</a>
-    <a href=",-journey/">My Journey</a>
+    <a href="/my-journey/">My Journey</a>
 </nav>
