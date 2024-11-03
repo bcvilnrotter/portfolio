@@ -25,19 +25,19 @@ jobs:
             - name: Run the script
               run: python scripts/update_repos.py
 
-            - name: Commit and push changes
-              run: |
-                git config --global user.name 'GitHub Actions'
-                git config --global user.name 'actions@github.com'
-                git add _data/repos.html
-                git commit -m "Update repos.html"
-                git push
-              env:
-                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            
             - name: Run update_email_trends scripts
               env:
                 NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
                 DATABASE_ID: ${{ secrets.NOTION_EMAIL_TRENDS_DBID }}
               run: |
                 python update_email_trends.py
+
+            - name: Commit and push changes
+              run: |
+                git config --global user.name 'GitHub Actions'
+                git config --global user.email 'actions@github.com'
+                git add _data/repos.html
+                git commit -m "Update repos.html"
+                git push
+              env:
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
