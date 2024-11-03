@@ -1,7 +1,7 @@
 ---
 layout: default
 title: My Journey
-permalink: /my-journey/
+permalink: /journey/
 
 # My Journey
 
