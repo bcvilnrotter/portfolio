@@ -50,22 +50,11 @@ def process_pages(data,headers):
     
     return filtered_data
 
-# function to display secrets in github actions
-def print_secret(name,secret):
-    if secret:
-        print(f'{name} collected: ' + '*'* len(secret))
-    else:
-        print(f'{name} not retrieved.')
-
 def main():
     # pull secrets an initialize variables
-    notion_dbid = print_secret("notion_dbid",get_secret('NOTION_EMAIL_TRENDS_DBID'))
-    notion_token = print_secret("notion_token",get_secret('NOTION_TOKEN'))
-    
-    
-    url = f"https://api.notion.com/v1/databases/{notion_dbid}/query"
+    url = f"https://api.notion.com/v1/databases/{get_secret('NOTION_EMAIL_TRENDS_DBID')}/query"
     headers = {
-        "Authorization": f"Bearer {notion_token}",
+        "Authorization": f"Bearer {get_secret('NOTION_TOKEN')}",
         "Content-Type": "application/json",
         "Notion-Version": "2022-06-28"
     }
