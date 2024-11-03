@@ -59,8 +59,8 @@ def print_secret(name,secret):
 
 def main():
     # pull secrets an initialize variables
-    notion_dbid = print_secret(get_secret('NOTION_EMAIL_TRENDS_DBID'))
-    notion_token = print_secret(get_secret('NOTION_TOKEN'))
+    notion_dbid = print_secret("notion_dbid",get_secret('NOTION_EMAIL_TRENDS_DBID'))
+    notion_token = print_secret("notion_token",get_secret('NOTION_TOKEN'))
     
     
     url = f"https://api.notion.com/v1/databases/{notion_dbid}/query"
