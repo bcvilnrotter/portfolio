@@ -1,5 +1,1069 @@
 [
   {
+    "sent_time": "2024-11-16T16:02:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-16T15:05:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-16T14:03:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-16T13:41:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-16T12:56:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-16T12:56:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-16T12:56:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-16T12:55:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-16T12:02:00.000-05:00",
+    "relation_id": "scam"
+  },
+  {
+    "sent_time": "2024-11-16T12:01:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-16T11:14:00.000-05:00",
+    "relation_id": "rejected"
+  },
+  {
+    "sent_time": "2024-11-16T11:10:00.000-05:00",
+    "relation_id": "rejected"
+  },
+  {
+    "sent_time": "2024-11-16T09:48:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-16T04:52:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-16T03:01:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-15T20:17:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-15T20:13:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-15T19:58:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-15T19:26:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-15T19:20:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-15T19:20:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-15T19:00:00.000-05:00",
+    "relation_id": "scam"
+  },
+  {
+    "sent_time": "2024-11-15T18:22:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-15T17:01:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-15T16:43:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-15T16:20:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-15T16:01:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-15T15:03:00.000-05:00",
+    "relation_id": "rejected"
+  },
+  {
+    "sent_time": "2024-11-15T15:01:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-15T14:02:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-15T12:01:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-15T11:48:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-15T11:03:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-15T10:03:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-15T10:01:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-15T10:01:00.000-05:00",
+    "relation_id": "interview"
+  },
+  {
+    "sent_time": "2024-11-15T09:50:00.000-05:00",
+    "relation_id": "rejected"
+  },
+  {
+    "sent_time": "2024-11-15T09:46:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-15T09:44:00.000-05:00",
+    "relation_id": "rejected"
+  },
+  {
+    "sent_time": "2024-11-15T09:39:00.000-05:00",
+    "relation_id": "rejected"
+  },
+  {
+    "sent_time": "2024-11-15T09:36:00.000-05:00",
+    "relation_id": "rejected"
+  },
+  {
+    "sent_time": "2024-11-15T09:10:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-15T08:09:00.000-05:00",
+    "relation_id": "rejected"
+  },
+  {
+    "sent_time": "2024-11-15T06:46:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-15T04:52:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-15T03:01:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-14T19:30:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-14T19:00:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-14T17:01:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-14T16:49:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-14T12:09:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-14T16:01:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-14T15:01:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-14T14:55:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-14T14:30:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-14T14:03:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-14T12:02:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-14T12:00:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-12T18:02:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-14T10:25:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-14T10:23:00.000-05:00",
+    "relation_id": "rejected"
+  },
+  {
+    "sent_time": "2024-11-14T11:17:00.000-05:00",
+    "relation_id": "rejected"
+  },
+  {
+    "sent_time": "2024-11-14T11:09:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-14T11:09:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-14T11:05:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-14T11:03:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-14T10:37:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-14T10:37:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-14T10:35:00.000-05:00",
+    "relation_id": "rejected"
+  },
+  {
+    "sent_time": "2024-11-14T10:35:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-14T10:34:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-14T10:30:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-14T10:27:00.000-05:00",
+    "relation_id": "rejected"
+  },
+  {
+    "sent_time": "2024-11-14T10:26:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-14T10:26:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-14T10:21:00.000-05:00",
+    "relation_id": "rejected"
+  },
+  {
+    "sent_time": "2024-11-14T10:20:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-14T10:19:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-14T10:18:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-14T10:13:00.000-05:00",
+    "relation_id": "rejected"
+  },
+  {
+    "sent_time": "2024-11-14T10:12:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-14T10:01:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-14T09:38:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-14T05:01:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-14T04:46:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-14T03:01:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-13T22:03:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-13T21:18:00.000-05:00",
+    "relation_id": "scam"
+  },
+  {
+    "sent_time": "2024-11-13T21:01:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-13T19:29:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-13T19:18:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-13T19:15:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-13T17:12:00.000-05:00",
+    "relation_id": "rejected"
+  },
+  {
+    "sent_time": "2024-11-13T15:58:00.000-05:00",
+    "relation_id": "rejected"
+  },
+  {
+    "sent_time": "2024-11-13T15:05:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-13T14:54:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-13T14:50:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-13T14:42:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-13T14:39:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-13T12:32:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-13T12:02:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-13T11:15:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-13T11:13:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-13T11:14:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-13T11:13:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-13T11:10:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-13T11:09:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-13T10:00:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-13T10:00:00.000-05:00",
+    "relation_id": "scam"
+  },
+  {
+    "sent_time": "2024-11-13T09:48:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-13T09:10:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-13T05:12:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-13T04:41:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-12T22:00:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-12T20:01:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-12T19:29:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-12T18:31:00.000-05:00",
+    "relation_id": "rejected"
+  },
+  {
+    "sent_time": "2024-11-12T18:05:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-12T16:19:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-12T16:01:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-12T15:01:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-12T15:00:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-12T14:28:00.000-05:00",
+    "relation_id": "rejected"
+  },
+  {
+    "sent_time": "2024-11-12T09:59:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-12T09:48:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-12T09:49:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-12T09:48:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-12T09:48:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-12T09:44:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-12T09:40:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-12T09:37:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-12T09:36:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-12T09:39:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-12T09:36:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-12T09:32:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-12T13:25:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-12T12:36:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-12T12:01:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-12T11:46:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-12T11:24:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-12T10:25:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-12T10:05:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-12T10:03:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-12T09:59:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-12T09:59:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-12T04:47:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-12T03:49:00.000-05:00",
+    "relation_id": "rejected"
+  },
+  {
+    "sent_time": "2024-11-12T03:02:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-11T21:06:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-11T20:48:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-11T19:06:00.000-05:00",
+    "relation_id": "rejected"
+  },
+  {
+    "sent_time": "2024-11-11T19:00:00.000-05:00",
+    "relation_id": "rejected"
+  },
+  {
+    "sent_time": "2024-11-11T17:01:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-11T16:06:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-11T16:01:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-11T15:05:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-11T14:24:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-11T14:16:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-11T14:11:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-11T12:48:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-11T12:02:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-11T11:50:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-11T11:43:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-10T03:27:00.000-05:00",
+    "relation_id": "rejected"
+  },
+  {
+    "sent_time": "2024-11-07T20:44:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-09T09:45:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-11T10:45:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-07T19:32:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-07T19:27:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-11T10:42:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-11T10:42:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-09T14:01:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-11T10:39:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-11T09:10:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-11T10:38:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-11T10:35:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-11T10:34:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-11T10:32:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-11T10:32:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-11T10:31:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-07T17:55:00.000-05:00",
+    "relation_id": "rejected"
+  },
+  {
+    "sent_time": "2024-11-11T06:06:00.000-05:00",
+    "relation_id": "rejected"
+  },
+  {
+    "sent_time": "2024-11-11T10:30:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-09T08:28:00.000-05:00",
+    "relation_id": "rejected"
+  },
+  {
+    "sent_time": "2024-11-11T10:28:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-09T08:24:00.000-05:00",
+    "relation_id": "rejected"
+  },
+  {
+    "sent_time": "2024-11-11T10:26:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-09T08:23:00.000-05:00",
+    "relation_id": "rejected"
+  },
+  {
+    "sent_time": "2024-11-09T00:34:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-11T10:25:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-11T10:20:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-11T10:23:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-11T10:22:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-11T10:21:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-09T16:02:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-11T10:13:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-11T10:12:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-11T10:10:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-09T12:02:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-11T10:00:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-11T04:38:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-11T09:57:00.000-05:00",
+    "relation_id": "rejected"
+  },
+  {
+    "sent_time": "2024-11-11T09:53:00.000-05:00",
+    "relation_id": "rejected"
+  },
+  {
+    "sent_time": "2024-11-11T09:53:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-11T09:52:00.000-05:00",
+    "relation_id": "rejected"
+  },
+  {
+    "sent_time": "2024-11-11T11:00:00.000-05:00",
+    "relation_id": "rejected"
+  },
+  {
+    "sent_time": "2024-11-09T04:37:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-09T17:17:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-11T10:55:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-09T04:04:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-09T17:01:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-07T15:58:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-07T16:03:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-11T10:48:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-11T10:46:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-07T16:02:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-08T19:23:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-08T15:05:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-07T15:18:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-08T12:02:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-08T16:05:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-10T19:22:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-08T17:15:00.000-05:00",
+    "relation_id": "rejected"
+  },
+  {
+    "sent_time": "2024-11-08T16:02:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-08T14:16:00.000-05:00",
+    "relation_id": "rejected"
+  },
+  {
+    "sent_time": "2024-11-07T15:09:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-08T11:10:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-08T16:00:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-08T14:01:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-07T14:31:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-08T17:02:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-07T15:01:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-08T13:27:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-08T13:19:00.000-05:00",
+    "relation_id": "rejected"
+  },
+  {
+    "sent_time": "2024-11-08T10:01:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-08T13:12:00.000-05:00",
+    "relation_id": "rejected"
+  },
+  {
+    "sent_time": "2024-11-08T09:56:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-08T09:56:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-08T09:53:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-08T09:52:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-08T09:52:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-08T09:52:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-08T09:51:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-08T09:49:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-08T09:48:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-08T09:48:00.000-05:00",
+    "relation_id": "received"
+  },
+  {
+    "sent_time": "2024-11-08T16:37:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-10T17:01:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-10T16:08:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-08T08:04:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-08T09:10:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-10T16:01:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-08T06:07:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-10T14:01:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-10T14:01:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-10T15:01:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-10T15:01:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-08T03:02:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-10T12:01:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-10T09:55:00.000-05:00",
+    "relation_id": "rejected"
+  },
+  {
+    "sent_time": "2024-11-10T09:44:00.000-05:00",
+    "relation_id": "rejected"
+  },
+  {
+    "sent_time": "2024-11-10T09:45:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-10T09:43:00.000-05:00",
+    "relation_id": "rejected"
+  },
+  {
+    "sent_time": "2024-11-07T23:01:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-10T04:36:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2024-11-05T04:08:00.000-05:00",
+    "relation_id": "rejected"
+  },
+  {
     "sent_time": "2024-11-07T14:16:00.000-05:00",
     "relation_id": "No Email Trend"
   },
@@ -233,7 +1297,7 @@
   },
   {
     "sent_time": "2024-11-06T09:10:00.000-05:00",
-    "relation_id": "No Email Trend"
+    "relation_id": "rejected"
   },
   {
     "sent_time": "2024-11-06T09:04:00.000-05:00",
@@ -253,7 +1317,7 @@
   },
   {
     "sent_time": "2024-11-06T08:30:00.000-05:00",
-    "relation_id": "received"
+    "relation_id": "rejected"
   },
   {
     "sent_time": "2024-11-06T08:29:00.000-05:00",
