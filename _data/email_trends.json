@@ -1,11 +1,203 @@
 [
   {
+    "sent_time": "2025-01-18T19:49:00.000-05:00",
+    "relation_id": "Job Application Response"
+  },
+  {
+    "sent_time": "2025-01-18T19:44:00.000-05:00",
+    "relation_id": "Job Application Updates"
+  },
+  {
+    "sent_time": "2025-01-18T16:43:00.000-05:00",
+    "relation_id": "Job Application Notification"
+  },
+  {
+    "sent_time": "2025-01-18T16:48:00.000-05:00",
+    "relation_id": "Job Application Update"
+  },
+  {
+    "sent_time": "2025-01-18T16:35:00.000-05:00",
+    "relation_id": "Job Application Confirmation"
+  },
+  {
+    "sent_time": "2025-01-18T16:35:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2025-01-18T13:24:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2025-01-18T05:01:00.000-05:00",
+    "relation_id": "LinkedIn Notification"
+  },
+  {
+    "sent_time": "2025-01-17T23:01:00.000-05:00",
+    "relation_id": "Job Opportunity"
+  },
+  {
+    "sent_time": "2025-01-17T21:01:00.000-05:00",
+    "relation_id": "LinkedIn Communication"
+  },
+  {
+    "sent_time": "2025-01-17T19:23:00.000-05:00",
+    "relation_id": "Recruitment Opportunity"
+  },
+  {
+    "sent_time": "2025-01-17T19:01:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2025-01-17T17:01:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2025-01-17T15:43:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2025-01-17T15:14:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2025-01-17T14:28:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2025-01-17T14:21:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2025-01-17T13:01:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2025-01-17T12:52:00.000-05:00",
+    "relation_id": "Job Market Insights"
+  },
+  {
+    "sent_time": "2025-01-17T11:01:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2025-01-17T09:01:00.000-05:00",
+    "relation_id": "LinkedIn Invitation"
+  },
+  {
+    "sent_time": "2025-01-16T17:01:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2025-01-16T15:24:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2025-01-16T12:47:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2025-01-16T12:47:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2025-01-16T09:08:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2025-01-16T09:01:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2025-01-16T08:53:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2025-01-16T08:53:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2025-01-15T22:59:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2025-01-15T19:47:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2025-01-15T19:47:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2025-01-15T19:43:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2025-01-15T19:01:00.000-05:00",
+    "relation_id": "Job Opportunities"
+  },
+  {
+    "sent_time": "2025-01-15T17:37:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2025-01-15T17:33:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2025-01-15T17:01:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2025-01-14T19:22:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2025-01-14T18:35:00.000-05:00",
+    "relation_id": "Corporate Updates"
+  },
+  {
+    "sent_time": "2025-01-14T17:01:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2025-01-14T14:24:00.000-05:00",
+    "relation_id": "Event Invitation"
+  },
+  {
+    "sent_time": "2025-01-14T12:43:00.000-05:00",
+    "relation_id": "Network Updates"
+  },
+  {
+    "sent_time": "2025-01-13T23:01:00.000-05:00",
+    "relation_id": "Job Alert"
+  },
+  {
+    "sent_time": "2025-01-13T19:26:00.000-05:00",
+    "relation_id": "Networking"
+  },
+  {
+    "sent_time": "2025-01-13T17:01:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2025-01-13T15:02:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
+    "sent_time": "2025-01-13T11:03:00.000-05:00",
+    "relation_id": "LinkedIn Message Notification"
+  },
+  {
+    "sent_time": "2025-01-12T15:01:00.000-05:00",
+    "relation_id": "No Email Trend"
+  },
+  {
     "sent_time": "2025-01-11T17:01:00.000-05:00",
-    "relation_id": "Job Alerts"
+    "relation_id": "No Email Trend"
   },
   {
     "sent_time": "2025-01-10T19:02:00.000-05:00",
-    "relation_id": "Job Opportunities"
+    "relation_id": "No Email Trend"
   },
   {
     "sent_time": "2025-01-10T17:01:00.000-05:00",
@@ -16,8 +208,8 @@
     "relation_id": "Job Application Status"
   },
   {
-    "sent_time": "2025-01-10T13:05:00.000-05:00",
-    "relation_id": "Job Application Confirmation"
+    "sent_time": "2025-01-16T09:51:00.000-05:00",
+    "relation_id": "No Email Trend"
   },
   {
     "sent_time": "2025-01-10T00:11:00.000-05:00",
@@ -48,7 +240,7 @@
     "relation_id": "Current Events"
   },
   {
-    "sent_time": "2025-01-08T15:02:00.000-05:00",
+    "sent_time": "2025-01-16T15:01:00.000-05:00",
     "relation_id": "No Email Trend"
   },
   {
@@ -101,7 +293,7 @@
   },
   {
     "sent_time": "2025-01-06T18:20:00.000-05:00",
-    "relation_id": "Job Application Update"
+    "relation_id": "No Email Trend"
   },
   {
     "sent_time": "2025-01-06T18:18:00.000-05:00",
@@ -144,7 +336,7 @@
     "relation_id": "No Email Trend"
   },
   {
-    "sent_time": "2025-01-11T13:02:00.000-05:00",
+    "sent_time": "2025-01-18T13:05:00.000-05:00",
     "relation_id": "No Email Trend"
   },
   {
@@ -256,7 +448,7 @@
     "relation_id": "No Email Trend"
   },
   {
-    "sent_time": "2025-01-07T19:01:00.000-05:00",
+    "sent_time": "2025-01-14T19:01:00.000-05:00",
     "relation_id": "rejected"
   },
   {
@@ -328,7 +520,7 @@
     "relation_id": "No Email Trend"
   },
   {
-    "sent_time": "2024-12-23T15:01:00.000-05:00",
+    "sent_time": "2025-01-18T15:06:00.000-05:00",
     "relation_id": "received"
   },
   {
@@ -672,7 +864,7 @@
     "relation_id": "offer"
   },
   {
-    "sent_time": "2025-01-09T03:01:00.000-05:00",
+    "sent_time": "2025-01-18T03:01:00.000-05:00",
     "relation_id": "received"
   },
   {
@@ -748,7 +940,7 @@
     "relation_id": "received"
   },
   {
-    "sent_time": "2024-12-18T10:51:00.000-05:00",
+    "sent_time": "2025-01-16T12:46:00.000-05:00",
     "relation_id": "received"
   },
   {
@@ -829,7 +1021,7 @@
   },
   {
     "sent_time": "2025-01-09T11:02:00.000-05:00",
-    "relation_id": "Job Opportunity"
+    "relation_id": "No Email Trend"
   },
   {
     "sent_time": "2024-12-17T07:35:00.000-05:00",
@@ -852,7 +1044,7 @@
     "relation_id": "No Email Trend"
   },
   {
-    "sent_time": "2024-12-16T17:03:00.000-05:00",
+    "sent_time": "2025-01-18T17:01:00.000-05:00",
     "relation_id": "received"
   },
   {
@@ -992,7 +1184,7 @@
     "relation_id": "No Email Trend"
   },
   {
-    "sent_time": "2025-01-10T15:03:00.000-05:00",
+    "sent_time": "2025-01-14T15:01:00.000-05:00",
     "relation_id": "No Email Trend"
   },
   {
@@ -2140,7 +2332,7 @@
     "relation_id": "No Email Trend"
   },
   {
-    "sent_time": "2024-11-21T03:01:00.000-05:00",
+    "sent_time": "2025-01-16T03:01:00.000-05:00",
     "relation_id": "No Email Trend"
   },
   {
@@ -3112,7 +3304,7 @@
     "relation_id": "No Email Trend"
   },
   {
-    "sent_time": "2025-01-10T03:01:00.000-05:00",
+    "sent_time": "2025-01-15T03:02:00.000-05:00",
     "relation_id": "No Email Trend"
   },
   {
@@ -3452,7 +3644,7 @@
     "relation_id": "No Email Trend"
   },
   {
-    "sent_time": "2024-11-12T09:37:00.000-05:00",
+    "sent_time": "2025-01-16T09:01:00.000-05:00",
     "relation_id": "received"
   },
   {
@@ -4256,7 +4448,7 @@
     "relation_id": "received"
   },
   {
-    "sent_time": "2024-11-06T08:29:00.000-05:00",
+    "sent_time": "2025-01-16T08:54:00.000-05:00",
     "relation_id": "received"
   },
   {
@@ -4676,7 +4868,7 @@
     "relation_id": "No Email Trend"
   },
   {
-    "sent_time": "2024-11-03T16:01:00.000-05:00",
+    "sent_time": "2025-01-12T17:01:00.000-05:00",
     "relation_id": "No Email Trend"
   },
   {
@@ -5104,7 +5296,7 @@
     "relation_id": "rejected"
   },
   {
-    "sent_time": "2024-11-01T10:33:00.000-04:00",
+    "sent_time": "2025-01-17T15:43:00.000-05:00",
     "relation_id": "received"
   },
   {
