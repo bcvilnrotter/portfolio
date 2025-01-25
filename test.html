@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Email Trends Test</title>
+    <title>Chart Test</title>
     <style>
         .error-message {
             color: red;
@@ -13,28 +13,32 @@
         canvas {
             max-height: 400px;
         }
+        .chart-container {
+            margin-bottom: 40px;
+            height: 400px;
+            position: relative;
+        }
     </style>
 </head>
 <body>
-    <!-- Application Activity Overview -->
-    <div style="margin-bottom: 40px;">
+    <h1>Application Tracking Charts</h1>
+
+    <div class="chart-container">
         <h2>Application Activity Overview</h2>
         <canvas id="activityChart"></canvas>
     </div>
 
-    <!-- Application Success Pipeline -->
-    <div style="margin-bottom: 40px;">
+    <div class="chart-container">
         <h2>Application Pipeline</h2>
         <canvas id="pipelineChart"></canvas>
     </div>
 
-    <!-- Weekly Response Rate -->
-    <div style="margin-bottom: 40px;">
+    <div class="chart-container">
         <h2>Weekly Response Rate</h2>
         <canvas id="responseChart"></canvas>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
     <script>
         function showError(message) {
             const errorDiv = document.createElement('div');
@@ -44,24 +48,74 @@
             console.error(message);
         }
 
-        function categorizeRelation(relation_id) {
-            if (!relation_id) return null;
-            const lower = relation_id.toLowerCase();
-            if (lower === 'no email trend') return null;
-            if (lower.includes('received') || lower.includes('application') || 
-                lower.includes('confirmation') || lower.includes('notification')) return 'received';
-            if (lower.includes('interview')) return 'interview';
-            if (lower.includes('offer')) return 'offer';
-            if (lower.includes('rejected') || lower.includes('rejection')) return 'rejected';
-            if (lower.includes('job') || lower.includes('career') || 
-                lower.includes('opportunity') || lower.includes('position')) return 'received';
-            return null;
-        }
+        // Sample data for testing
+        const sampleData = [
+            { sent_time: "2024-12-01T10:00:00.000-05:00", relation_id: "received" },
+            { sent_time: "2024-12-01T11:00:00.000-05:00", relation_id: "interview" },
+            { sent_time: "2024-12-01T12:00:00.000-05:00", relation_id: "offer" },
+            { sent_time: "2024-12-01T13:00:00.000-05:00", relation_id: "rejected" },
+            { sent_time: "2024-12-02T10:00:00.000-05:00", relation_id: "Job Application Response" },
+            { sent_time: "2024-12-02T11:00:00.000-05:00", relation_id: "Interview Invitation" },
+            { sent_time: "2024-12-02T12:00:00.000-05:00", relation_id: "Job Offer" },
+            { sent_time: "2024-12-02T13:00:00.000-05:00", relation_id: "Application Rejected" },
+            { sent_time: "2024-12-03T10:00:00.000-05:00", relation_id: "No Email Trend" }
+        ];
 
-        function createActivityChart(ctx, dates, processedData, relations, colors) {
+        document.addEventListener("DOMContentLoaded", function() {
             try {
-                console.log('Creating activity chart with', dates.length, 'dates');
-                return new Chart(ctx, {
+                const colors = {
+                    received: 'rgba(75,192,192,0.6)',    // Teal
+                    rejected: 'rgba(255,99,132,0.6)',    // Red
+                    interview: 'rgba(54,162,235,0.6)',   // Blue
+                    offer: 'rgba(255,206,86,0.6)',       // Yellow
+                    default: 'rgba(201,203,207,0.4)'     // Gray
+                };
+
+                function categorizeRelation(relation_id) {
+                    if (!relation_id) return null;
+                    const lower = relation_id.toLowerCase();
+                    
+                    // Handle exact matches first
+                    if (lower === 'received' || lower === 'interview' || 
+                        lower === 'offer' || lower === 'rejected') {
+                        return lower;
+                    }
+                    
+                    // Skip non-job related emails
+                    if (lower === 'no email trend' || lower === 'scam') return null;
+                    
+                    // Categorize based on keywords
+                    if (lower.includes('interview')) return 'interview';
+                    if (lower.includes('offer')) return 'offer';
+                    if (lower.includes('rejected') || lower.includes('rejection')) return 'rejected';
+                    
+                    // Default to received for any job-related communication
+                    if (lower.includes('job') || lower.includes('career') || 
+                        lower.includes('opportunity') || lower.includes('position') ||
+                        lower.includes('application') || lower.includes('confirmation') || 
+                        lower.includes('notification') || lower.includes('recruitment')) {
+                        return 'received';
+                    }
+                    
+                    return null;
+                }
+
+                // Pre-process data to remove uncategorized items
+                const processedData = sampleData.filter(item => {
+                    const category = categorizeRelation(item.relation_id);
+                    return category !== null;
+                });
+                console.log('Processed data:', processedData.length, 'entries');
+
+                // Get unique dates from processed data
+                const dates = [...new Set(processedData.map(item => item.sent_time.split('T')[0]))].sort();
+                console.log('Date range:', dates[0], 'to', dates[dates.length - 1]);
+
+                const relations = ['received', 'interview', 'offer', 'rejected'];
+
+                // Activity Chart
+                const activityCtx = document.getElementById('activityChart').getContext('2d');
+                new Chart(activityCtx, {
                     type: 'bar',
                     data: {
                         labels: dates,
@@ -89,42 +143,23 @@
                         }
                     }
                 });
-            } catch (error) {
-                showError(`Error creating activity chart: ${error.message}`);
-                return null;
-            }
-        }
 
-        function createPipelineChart(ctx, dates, processedData, relations, colors) {
-            try {
-                console.log('Creating pipeline chart...');
+                // Pipeline Chart
+                const pipelineCtx = document.getElementById('pipelineChart').getContext('2d');
                 const cumulativeData = {};
-                
-                // Initialize cumulative data for each relation
                 relations.forEach(relation => {
-                    cumulativeData[relation] = new Array(dates.length).fill(0);
-                });
-
-                // Calculate cumulative totals
-                dates.forEach((date, dateIndex) => {
-                    relations.forEach(relation => {
+                    let runningTotal = 0;
+                    cumulativeData[relation] = dates.map(date => {
                         const dailyCount = processedData.filter(item => 
                             item.sent_time.startsWith(date) && 
                             categorizeRelation(item.relation_id) === relation
                         ).length;
-                        
-                        cumulativeData[relation][dateIndex] = dailyCount + 
-                            (dateIndex > 0 ? cumulativeData[relation][dateIndex - 1] : 0);
+                        runningTotal += dailyCount;
+                        return runningTotal;
                     });
                 });
 
-                console.log('Cumulative data calculated:', 
-                    Object.keys(cumulativeData).map(k => 
-                        `${k}: ${cumulativeData[k][cumulativeData[k].length - 1]}`
-                    ).join(', ')
-                );
-
-                return new Chart(ctx, {
+                new Chart(pipelineCtx, {
                     type: 'line',
                     data: {
                         labels: dates,
@@ -146,23 +181,14 @@
                         }
                     }
                 });
-            } catch (error) {
-                showError(`Error creating pipeline chart: ${error.message}`);
-                return null;
-            }
-        }
 
-        function createResponseRateChart(ctx, processedData, colors) {
-            try {
-                console.log('Creating response rate chart...');
+                // Response Rate Chart
+                const responseCtx = document.getElementById('responseChart').getContext('2d');
                 const weeklyData = {};
-                
-                // Process weekly data
                 processedData.forEach(item => {
                     const date = new Date(item.sent_time);
                     const week = `${date.getFullYear()}-W${Math.ceil((date.getDate() + date.getDay()) / 7)}`;
                     const category = categorizeRelation(item.relation_id);
-                    if (!category) return;
                     
                     if (!weeklyData[week]) {
                         weeklyData[week] = { total: 0, positive: 0 };
@@ -174,15 +200,13 @@
                 });
 
                 const weeks = Object.keys(weeklyData).sort();
-                console.log('Processing', weeks.length, 'weeks of data');
-
                 const responseRate = weeks.map(week => {
                     const rate = (weeklyData[week].positive / weeklyData[week].total) * 100;
                     console.log(`Week ${week}: ${rate.toFixed(1)}% (${weeklyData[week].positive}/${weeklyData[week].total})`);
                     return rate;
                 });
 
-                return new Chart(ctx, {
+                new Chart(responseCtx, {
                     type: 'line',
                     data: {
                         labels: weeks,
@@ -212,72 +236,9 @@
                     }
                 });
             } catch (error) {
-                showError(`Error creating response rate chart: ${error.message}`);
-                return null;
-            }
-        }
-
-        fetch('_data/email_trends.json')
-            .then(response => {
-                if (!response.ok) throw new Error('Network response was not ok');
-                return response.json();
-            })
-            .then(data => {
-                if (!Array.isArray(data)) throw new Error('Invalid data format');
-                console.log('Raw data loaded:', data.length, 'entries');
-
-                const colors = {
-                    received: 'rgba(75,192,192,0.6)',    // Teal
-                    rejected: 'rgba(255,99,132,0.6)',    // Red
-                    interview: 'rgba(54,162,235,0.6)',   // Blue
-                    offer: 'rgba(255,206,86,0.6)',       // Yellow
-                    default: 'rgba(201,203,207,0.4)'     // Gray
-                };
-
-                const processedData = data.filter(item => categorizeRelation(item.relation_id) !== null);
-                console.log('Processed data:', processedData.length, 'entries');
-
-                if (processedData.length === 0) {
-                    throw new Error('No valid data entries found after processing');
-                }
-
-                const dates = [...new Set(processedData.map(item => item.sent_time.split('T')[0]))].sort();
-                console.log('Date range:', dates[0], 'to', dates[dates.length - 1]);
-
-                const relations = ['received', 'interview', 'offer', 'rejected'];
-
-                // Create charts with validation
-                try {
-                    console.log('Creating activity chart...');
-                    const activityCtx = document.getElementById('activityChart')?.getContext('2d');
-                    if (!activityCtx) throw new Error('Could not get activity chart context');
-                    const activityChart = createActivityChart(
-                        activityCtx,
-                        dates, processedData, relations, colors
-                    );
-
-                    console.log('Creating pipeline chart...');
-                    const pipelineCtx = document.getElementById('pipelineChart')?.getContext('2d');
-                    if (!pipelineCtx) throw new Error('Could not get pipeline chart context');
-                    const pipelineChart = createPipelineChart(
-                        pipelineCtx,
-                        dates, processedData, relations, colors
-                    );
-
-                    console.log('Creating response rate chart...');
-                    const responseCtx = document.getElementById('responseChart')?.getContext('2d');
-                    if (!responseCtx) throw new Error('Could not get response rate chart context');
-                    const responseChart = createResponseRateChart(
-                        responseCtx,
-                        processedData, colors
-                    );
-                } catch (error) {
-                    showError(`Error creating charts: ${error.message}`);
-                }
-            })
-            .catch(error => {
                 showError(`Failed to load or process data: ${error.message}`);
-            });
+            }
+        });
     </script>
 </body>
 </html>
