@@ -351,20 +351,56 @@
 
         async function createCharts(data) {
             try {
+                console.log('Starting chart creation with data length:', data.length);
+                
+                // Validate data structure
+                if (!Array.isArray(data)) {
+                    throw new Error('Data must be an array');
+                }
+                
+                // Validate data items
+                const validData = data.filter(item => {
+                    return item && 
+                           typeof item === 'object' && 
+                           typeof item.sent_time === 'string' &&
+                           typeof item.relation_id === 'string';
+                });
+                
+                console.log('Valid data items:', validData.length);
+                
+                if (validData.length === 0) {
+                    throw new Error('No valid data items found');
+                }
+                
                 // Sort data by date in descending order
-                data.sort((a, b) => new Date(b.sent_time) - new Date(a.sent_time));
+                validData.sort((a, b) => new Date(b.sent_time) - new Date(a.sent_time));
                 
-                // Get date ranges
+                // Get date ranges with proper date handling
                 const now = new Date();
-                const threeMonthsAgo = new Date(now.setMonth(now.getMonth() - 3));
-                const sixMonthsAgo = new Date(now.setMonth(now.getMonth() - 3)); // -6 months total
+                const threeMonthsAgo = new Date();
+                threeMonthsAgo.setMonth(now.getMonth() - 3);
                 
-                // Process recent data only
+                const sixMonthsAgo = new Date();
+                sixMonthsAgo.setMonth(now.getMonth() - 6);
+                
+                console.log('Date ranges:', {
+                    now: now.toISOString(),
+                    threeMonthsAgo: threeMonthsAgo.toISOString(),
+                    sixMonthsAgo: sixMonthsAgo.toISOString()
+                });
+                
+                // Process recent data with validation
                 const processedData = new Map();
                 let totalProcessed = 0;
+                let skippedItems = 0;
                 
-                // Process data with date filtering
-                data.forEach(item => {
+                // Process data with date filtering and validation
+                validData.forEach(item => {
+                    if (!item.sent_time) {
+                        skippedItems++;
+                        return;
+                    }
+                    
                     const itemDate = new Date(item.sent_time);
                     if (itemDate >= threeMonthsAgo) {
                         const date = item.sent_time.split('T')[0];
@@ -385,10 +421,18 @@
                     }
                 });
                 
-                console.log(`Processed ${totalProcessed} records from the last 3 months`);
+                console.log(`Processing summary:
+                    - Total valid records: ${validData.length}
+                    - Processed records (3 months): ${totalProcessed}
+                    - Skipped records: ${skippedItems}
+                    - Unique dates: ${processedData.size}`);
                 
-                // Get sorted dates for the last 3 months
+                // Get sorted dates with validation
                 const dates = [...processedData.keys()].sort();
+                if (dates.length === 0) {
+                    throw new Error('No valid dates found in the processed data');
+                }
+                console.log(`Date range: ${dates[0]} to ${dates[dates.length - 1]}`);
                 const relations = ['received', 'interview', 'offer', 'rejected'];
 
 
@@ -426,30 +470,40 @@
                     }
                 });
 
-                // Process pipeline data (6 months)
+                // Process pipeline data with validation and counting
                 const pipelineData = new Map();
-                data.forEach(item => {
-                    const itemDate = new Date(item.sent_time);
-                    if (itemDate >= sixMonthsAgo) {
-                        const date = item.sent_time.split('T')[0];
-                        const category = categorizeRelation(item.relation_id);
-                        
-                        if (category) {
-                            if (!pipelineData.has(date)) {
-                                pipelineData.set(date, {
-                                    received: 0,
-                                    interview: 0,
-                                    offer: 0,
-                                    rejected: 0
-                                });
+                let pipelineProcessed = 0;
+                validData.forEach(item => {
+                    try {
+                        const itemDate = new Date(item.sent_time);
+                        if (itemDate >= sixMonthsAgo) {
+                            const date = item.sent_time.split('T')[0];
+                            const category = categorizeRelation(item.relation_id);
+                            
+                            if (category) {
+                                if (!pipelineData.has(date)) {
+                                    pipelineData.set(date, {
+                                        received: 0,
+                                        interview: 0,
+                                        offer: 0,
+                                        rejected: 0
+                                    });
+                                }
+                                pipelineData.get(date)[category]++;
+                                pipelineProcessed++;
                             }
-                            pipelineData.get(date)[category]++;
                         }
+                    } catch (err) {
+                        console.warn('Error processing pipeline item:', err);
                     }
                 });
 
-                // Calculate cumulative totals for pipeline
+                // Calculate cumulative totals with validation
                 const pipelineDates = [...pipelineData.keys()].sort();
+                console.log(`Pipeline data:
+                    - Processed records (6 months): ${pipelineProcessed}
+                    - Unique dates: ${pipelineData.size}
+                    - Date range: ${pipelineDates[0]} to ${pipelineDates[pipelineDates.length - 1]}`);
                 const cumulativeData = {};
                 relations.forEach(relation => {
                     let runningTotal = 0;
@@ -492,35 +546,56 @@
                     }
                 });
 
-                // Calculate weekly response rates (using last 6 months for meaningful trends)
+                // Calculate weekly response rates with validation and counting
                 const weeklyData = {};
-                data.forEach(item => {
-                    const itemDate = new Date(item.sent_time);
-                    if (itemDate >= sixMonthsAgo) {
-                        const week = `${itemDate.getFullYear()}-W${Math.ceil((itemDate.getDate() + itemDate.getDay()) / 7)}`;
-                        const category = categorizeRelation(item.relation_id);
-                        
-                        if (category) {
-                            if (!weeklyData[week]) {
-                                weeklyData[week] = { total: 0, positive: 0 };
-                            }
-                            weeklyData[week].total++;
-                            if (category === 'interview' || category === 'offer') {
-                                weeklyData[week].positive++;
+                let weeklyProcessed = 0;
+                validData.forEach(item => {
+                    try {
+                        const itemDate = new Date(item.sent_time);
+                        if (itemDate >= sixMonthsAgo) {
+                            const week = `${itemDate.getFullYear()}-W${Math.ceil((itemDate.getDate() + itemDate.getDay()) / 7)}`;
+                            const category = categorizeRelation(item.relation_id);
+                            
+                            if (category) {
+                                if (!weeklyData[week]) {
+                                    weeklyData[week] = { total: 0, positive: 0 };
+                                }
+                                weeklyData[week].total++;
+                                if (category === 'interview' || category === 'offer') {
+                                    weeklyData[week].positive++;
+                                }
+                                weeklyProcessed++;
                             }
                         }
+                    } catch (err) {
+                        console.warn('Error processing weekly item:', err);
                     }
                 });
 
-                // Only show weeks with data
-                Object.keys(weeklyData).forEach(week => {
-                    if (weeklyData[week].total === 0) {
-                        delete weeklyData[week];
-                    }
+                console.log(`Weekly response data:
+                    - Processed records: ${weeklyProcessed}
+                    - Unique weeks: ${Object.keys(weeklyData).length}`);
+                
+                // Filter out weeks with no data and validate
+                const weeksWithData = Object.keys(weeklyData).filter(week => {
+                    return weeklyData[week] && weeklyData[week].total > 0;
                 });
 
-                // Sort weeks and limit to last 6 months
-                const weeks = Object.keys(weeklyData)
+                if (weeksWithData.length === 0) {
+                    console.warn('No weekly data found after filtering');
+                }
+
+                // Sort and validate weeks with error handling
+                const weeks = weeksWithData
+                    .filter(week => {
+                        try {
+                            const [year, w] = week.split('-W');
+                            return !isNaN(parseInt(year)) && !isNaN(parseInt(w));
+                        } catch (err) {
+                            console.warn('Invalid week format:', week);
+                            return false;
+                        }
+                    })
                     .sort()
                     .filter(week => {
                         const [year, w] = week.split('-W');
@@ -528,8 +603,15 @@
                         return weekDate >= sixMonthsAgo;
                     });
                 const responseRate = weeks.map(week => {
-                    const rate = (weeklyData[week].positive / weeklyData[week].total) * 100;
-                    return rate;
+                    try {
+                        const { positive, total } = weeklyData[week];
+                        if (total === 0) return 0;
+                        const rate = (positive / total) * 100;
+                        return isNaN(rate) ? 0 : rate;
+                    } catch (err) {
+                        console.warn('Error calculating response rate for week:', week);
+                        return 0;
+                    }
                 });
 
                 new Chart(document.getElementById('responseChart').getContext('2d'), {
