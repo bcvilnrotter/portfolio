@@ -310,45 +310,91 @@
             return null;
         }
 
-        // Process data in chunks to avoid blocking the main thread
+        // Process data in chunks with memory optimization
         function processDataChunk(data, startIndex, chunkSize, callback) {
             return new Promise((resolve) => {
-                setTimeout(() => {
-                    const endIndex = Math.min(startIndex + chunkSize, data.length);
-                    const chunk = data.slice(startIndex, endIndex);
-                    const processedChunk = chunk.filter(item => {
-                        const category = categorizeRelation(item.relation_id);
-                        return category !== null;
-                    });
-                    callback(processedChunk);
-                    resolve(endIndex < data.length ? endIndex : null);
-                }, 0);
+                // Use requestAnimationFrame for better performance
+                requestAnimationFrame(async () => {
+                    try {
+                        const endIndex = Math.min(startIndex + chunkSize, data.length);
+                        const chunk = data.slice(startIndex, endIndex);
+                        
+                        // Process chunk with error handling
+                        const processedChunk = chunk.reduce((acc, item) => {
+                            try {
+                                const category = categorizeRelation(item.relation_id);
+                                if (category !== null) {
+                                    acc.push({
+                                        date: item.sent_time.split('T')[0],
+                                        category: category
+                                    });
+                                }
+                            } catch (err) {
+                                console.warn('Error processing item:', err);
+                            }
+                            return acc;
+                        }, []);
+
+                        callback(processedChunk);
+                        
+                        // Clear references to help garbage collection
+                        chunk.length = 0;
+                        
+                        resolve(endIndex < data.length ? endIndex : null);
+                    } catch (err) {
+                        console.error('Chunk processing error:', err);
+                        resolve(null);
+                    }
+                });
             });
         }
 
         async function createCharts(data) {
             try {
-                const CHUNK_SIZE = 100; // Process 100 items at a time
-                let processedData = [];
+                const CHUNK_SIZE = 500; // Increased chunk size for better performance
+                const processedData = new Map(); // Use Map for better memory efficiency
                 let nextIndex = 0;
+                let totalProcessed = 0;
 
-                // Process data in chunks
+                // Process data in chunks with better progress tracking
                 while (nextIndex !== null) {
-                    nextIndex = await processDataChunk(data, nextIndex, CHUNK_SIZE, (chunk) => {
-                        processedData = processedData.concat(chunk);
-                        // Update loading message to show progress
-                        const progress = Math.min(100, Math.round((nextIndex / data.length) * 100));
-                        document.querySelectorAll('.loading div:last-child').forEach(el => {
-                            el.textContent = `Processing data... ${progress}%`;
+                    try {
+                        nextIndex = await processDataChunk(data, nextIndex, CHUNK_SIZE, (chunk) => {
+                            // Store processed data efficiently
+                            chunk.forEach(({date, category}) => {
+                                if (!processedData.has(date)) {
+                                    processedData.set(date, {
+                                        received: 0,
+                                        interview: 0,
+                                        offer: 0,
+                                        rejected: 0
+                                    });
+                                }
+                                processedData.get(date)[category]++;
+                            });
+                            
+                            totalProcessed += chunk.length;
+                            const progress = Math.min(100, Math.round((totalProcessed / data.length) * 100));
+                            
+                            // Update all loading indicators
+                            document.querySelectorAll('.loading div:last-child').forEach(el => {
+                                el.textContent = `Processing data... ${progress}% (${totalProcessed.toLocaleString()} / ${data.length.toLocaleString()} records)`;
+                            });
                         });
-                    });
+                    } catch (err) {
+                        console.error('Error in chunk processing:', err);
+                        showError('Error processing data chunk. Attempting to continue...');
+                    }
                 }
 
-                const dates = [...new Set(processedData.map(item => item.sent_time.split('T')[0]))].sort();
+                // Clear original data reference to free memory
+                data.length = 0;
+
+                const dates = [...processedData.keys()].sort();
                 const relations = ['received', 'interview', 'offer', 'rejected'];
 
 
-                // Activity Chart with enhanced interactivity
+                // Activity Chart with optimized data handling
                 new Chart(document.getElementById('activityChart').getContext('2d'), {
                     type: 'bar',
                     data: {
@@ -356,12 +402,7 @@
                         datasets: relations.map(relation => ({
                             label: relation.charAt(0).toUpperCase() + relation.slice(1),
                             backgroundColor: colors[relation],
-                            data: dates.map(date => 
-                                processedData.filter(item => 
-                                    item.sent_time.startsWith(date) && 
-                                    categorizeRelation(item.relation_id) === relation
-                                ).length
-                            )
+                            data: dates.map(date => processedData.get(date)[relation])
                         }))
                     },
                     options: {
@@ -387,15 +428,12 @@
                     }
                 });
 
-                // Pipeline Chart with enhanced interactivity
+                // Pipeline Chart with Map data structure
                 const cumulativeData = {};
                 relations.forEach(relation => {
                     let runningTotal = 0;
                     cumulativeData[relation] = dates.map(date => {
-                        const dailyCount = processedData.filter(item => 
-                            item.sent_time.startsWith(date) && 
-                            categorizeRelation(item.relation_id) === relation
-                        ).length;
+                        const dailyCount = processedData.get(date)[relation];
                         runningTotal += dailyCount;
                         return runningTotal;
                     });
@@ -433,20 +471,23 @@
                     }
                 });
 
-                // Response Rate Chart
+                // Response Rate Chart with Map data structure
                 const weeklyData = {};
-                processedData.forEach(item => {
-                    const date = new Date(item.sent_time);
-                    const week = `${date.getFullYear()}-W${Math.ceil((date.getDate() + date.getDay()) / 7)}`;
-                    const category = categorizeRelation(item.relation_id);
+                dates.forEach(date => {
+                    const dateObj = new Date(date);
+                    const week = `${dateObj.getFullYear()}-W${Math.ceil((dateObj.getDate() + dateObj.getDay()) / 7)}`;
+                    const dayData = processedData.get(date);
                     
                     if (!weeklyData[week]) {
                         weeklyData[week] = { total: 0, positive: 0 };
                     }
-                    weeklyData[week].total++;
-                    if (category === 'interview' || category === 'offer') {
-                        weeklyData[week].positive++;
-                    }
+                    
+                    // Sum up all categories for total
+                    const total = relations.reduce((sum, rel) => sum + dayData[rel], 0);
+                    weeklyData[week].total += total;
+                    
+                    // Sum up positive responses (interviews and offers)
+                    weeklyData[week].positive += dayData.interview + dayData.offer;
                 });
 
                 const weeks = Object.keys(weeklyData).sort();
@@ -519,13 +560,15 @@
         // Load data with XMLHttpRequest for better local file support
         function loadData() {
             const xhr = new XMLHttpRequest();
-            xhr.open('GET', './_data/email_trends.json', true);
+            xhr.open('GET', '_data/email_trends.json', true);
+            xhr.responseType = 'text';
             
             xhr.onprogress = function(e) {
                 if (e.lengthComputable) {
                     const progress = Math.round((e.loaded / e.total) * 100);
+                    const sizeMB = (e.loaded / 1024 / 1024).toFixed(2);
                     document.querySelectorAll('.loading div:last-child').forEach(el => {
-                        el.textContent = `Loading data... ${progress}%`;
+                        el.textContent = `Loading data... ${progress}% (${sizeMB} MB)`;
                     });
                 }
             };
@@ -533,7 +576,9 @@
             xhr.onload = async function() {
                 if (xhr.status === 200) {
                     try {
+                        console.log('Data loaded successfully, parsing...');
                         const data = JSON.parse(xhr.responseText);
+                        console.log(`Parsed ${data.length} records, creating charts...`);
                         await createCharts(data);
                     } catch (error) {
                         showError(`Failed to parse data: ${error.message}`);
@@ -545,10 +590,16 @@
             };
             
             xhr.onerror = function() {
-                showError('Failed to load data. Please check your connection.');
+                showError('Failed to load data. Please check your connection and file path.');
+                console.error('XHR error:', xhr.statusText);
             };
             
-            xhr.send();
+            try {
+                xhr.send();
+            } catch (error) {
+                showError(`Failed to start request: ${error.message}`);
+                console.error('Send error:', error);
+            }
         }
 
         // Initialize loading
