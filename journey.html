@@ -241,127 +241,77 @@
             loading.style.display = 'none';
         }
 
-        function initCharts() {
-            try {
-                // Hide loading states after charts are initialized
-                ['activityChart', 'pipelineChart', 'responseChart'].forEach(id => {
-                    setTimeout(() => hideLoading(id), 800);
-                });
+        const colors = {
+            received: 'rgba(75,192,192,0.6)',
+            rejected: 'rgba(255,99,132,0.6)',
+            interview: 'rgba(54,162,235,0.6)',
+            offer: 'rgba(255,206,86,0.6)',
+            default: 'rgba(201,203,207,0.4)'
+        };
 
-                const data = [
-                    // Original data
-                    {"sent_time":"2025-01-18T19:49:00.000-05:00","relation_id":"Job Application Response"},
-                    {"sent_time":"2025-01-18T19:44:00.000-05:00","relation_id":"Job Application Updates"},
-                    {"sent_time":"2025-01-18T16:43:00.000-05:00","relation_id":"Job Application Notification"},
-                    {"sent_time":"2025-01-18T16:48:00.000-05:00","relation_id":"Job Application Update"},
-                    {"sent_time":"2025-01-18T16:35:00.000-05:00","relation_id":"Job Application Confirmation"},
-                    {"sent_time":"2025-01-18T05:01:00.000-05:00","relation_id":"LinkedIn Notification"},
-                    {"sent_time":"2025-01-17T23:01:00.000-05:00","relation_id":"Job Opportunity"},
-                    {"sent_time":"2025-01-17T21:01:00.000-05:00","relation_id":"LinkedIn Communication"},
-                    {"sent_time":"2025-01-17T19:23:00.000-05:00","relation_id":"Recruitment Opportunity"},
-                    {"sent_time":"2025-01-17T12:52:00.000-05:00","relation_id":"Job Market Insights"},
-                    {"sent_time":"2025-01-17T09:01:00.000-05:00","relation_id":"LinkedIn Invitation"},
-                    {"sent_time":"2025-01-15T19:01:00.000-05:00","relation_id":"Job Opportunities"},
-                    {"sent_time":"2025-01-14T18:35:00.000-05:00","relation_id":"Corporate Updates"},
-                    {"sent_time":"2025-01-14T14:24:00.000-05:00","relation_id":"Event Invitation"},
-                    {"sent_time":"2025-01-14T12:43:00.000-05:00","relation_id":"Network Updates"},
-                    {"sent_time":"2025-01-13T23:01:00.000-05:00","relation_id":"Job Alert"},
-                    {"sent_time":"2025-01-13T19:26:00.000-05:00","relation_id":"Networking"},
-                    {"sent_time":"2025-01-13T11:03:00.000-05:00","relation_id":"LinkedIn Message Notification"},
-                    {"sent_time":"2025-01-10T14:01:00.000-05:00","relation_id":"Job Application Status"},
-                    {"sent_time":"2025-01-10T00:11:00.000-05:00","relation_id":"Job Application Issues"},
-                    {"sent_time":"2025-01-10T11:02:00.000-05:00","relation_id":"LinkedIn Notifications"},
-                    {"sent_time":"2025-01-07T19:23:00.000-05:00","relation_id":"Connection Request"},
-                    {"sent_time":"2025-01-07T10:45:00.000-05:00","relation_id":"Network Update"},
-                    {"sent_time":"2025-01-07T10:44:00.000-05:00","relation_id":"Professional Development"},
-                    {"sent_time":"2025-01-06T19:29:00.000-05:00","relation_id":"Professional Networking"},
-                    {"sent_time":"2025-01-06T19:18:00.000-05:00","relation_id":"Urban Planning Updates"},
-                    {"sent_time":"2025-01-06T19:12:00.000-05:00","relation_id":"Career Development"},
-                    
-                    // Added interview emails
-                    {"sent_time":"2025-01-18T15:30:00.000-05:00","relation_id":"Interview Schedule: Next Steps"},
-                    {"sent_time":"2025-01-17T14:20:00.000-05:00","relation_id":"Technical Interview Invitation"},
-                    {"sent_time":"2025-01-15T11:45:00.000-05:00","relation_id":"Meeting with the Team"},
-                    
-                    // Added offer emails
-                    {"sent_time":"2025-01-16T16:15:00.000-05:00","relation_id":"Congratulations - Job Offer"},
-                    {"sent_time":"2025-01-14T10:30:00.000-05:00","relation_id":"Welcome Aboard! Compensation Details"},
-                    
-                    // Added rejection emails
-                    {"sent_time":"2025-01-13T09:45:00.000-05:00","relation_id":"Thank you for your interest"},
-                    {"sent_time":"2025-01-12T14:20:00.000-05:00","relation_id":"Application Status: Moving Forward with Other Candidates"},
-                    {"sent_time":"2025-01-11T16:30:00.000-05:00","relation_id":"Unfortunately, we have decided not to proceed"}
-                ];
-
-                const colors = {
-                    received: 'rgba(75,192,192,0.6)',
-                    rejected: 'rgba(255,99,132,0.6)',
-                    interview: 'rgba(54,162,235,0.6)',
-                    offer: 'rgba(255,206,86,0.6)',
-                    default: 'rgba(201,203,207,0.4)'
-                };
-
-                function categorizeRelation(relation_id) {
-                    if (!relation_id) return null;
-                    const lower = relation_id.toLowerCase();
-                    
-                    // Skip non-relevant emails
-                    if (lower === 'no email trend' || lower === 'scam') return null;
-                    
-                    // Check for interview status
-                    if (lower === 'interview' || 
-                        lower.includes('interview') || 
-                        lower.includes('meeting') ||
-                        lower.includes('schedule') ||
-                        (lower.includes('next') && lower.includes('steps'))) return 'interview';
-                    
-                    // Check for offer status
-                    if (lower === 'offer' || 
-                        lower.includes('offer') || 
-                        lower.includes('congratulation') ||
-                        lower.includes('welcome aboard') ||
-                        lower.includes('compensation')) return 'offer';
-                    
-                    // Check for rejection status
-                    if (lower === 'rejected' || 
-                        lower.includes('rejected') || 
-                        lower.includes('rejection') || 
-                        lower.includes('decline') ||
-                        lower.includes('not moving forward') ||
-                        lower.includes('other candidates') ||
-                        lower.includes('unfortunately') ||
-                        (lower.includes('thank') && lower.includes('interest'))) return 'rejected';
-                    
-                    // Check for application status
-                    if (lower === 'received' || 
-                        lower.includes('job') || 
-                        lower.includes('career') || 
-                        lower.includes('opportunity') || 
-                        lower.includes('position') ||
-                        lower.includes('application') || 
-                        lower.includes('confirmation') || 
-                        lower.includes('notification') || 
-                        lower.includes('recruitment') ||
-                        lower.includes('response') ||
-                        lower.includes('status') ||
-                        lower.includes('update') ||
-                        lower.includes('alert') ||
-                        lower.includes('opening')) {
-                        
-                        // Don't categorize as received if it's a rejection
-                        if (lower.includes('unfortunately') || 
-                            lower.includes('not moving forward') ||
-                            (lower.includes('thank') && lower.includes('interest'))) {
-                            return 'rejected';
-                        }
-                        
-                        return 'received';
-                    }
-                    
-                    // Return null for any other types of emails
-                    return null;
+        function categorizeRelation(relation_id) {
+            if (!relation_id) return null;
+            const lower = relation_id.toLowerCase();
+            
+            // Skip non-relevant emails
+            if (lower === 'no email trend' || lower === 'scam') return null;
+            
+            // Check for interview status
+            if (lower === 'interview' || 
+                lower.includes('interview') || 
+                lower.includes('meeting') ||
+                lower.includes('schedule') ||
+                (lower.includes('next') && lower.includes('steps'))) return 'interview';
+            
+            // Check for offer status
+            if (lower === 'offer' || 
+                lower.includes('offer') || 
+                lower.includes('congratulation') ||
+                lower.includes('welcome aboard') ||
+                lower.includes('compensation')) return 'offer';
+            
+            // Check for rejection status
+            if (lower === 'rejected' || 
+                lower.includes('rejected') || 
+                lower.includes('rejection') || 
+                lower.includes('decline') ||
+                lower.includes('not moving forward') ||
+                lower.includes('other candidates') ||
+                lower.includes('unfortunately') ||
+                (lower.includes('thank') && lower.includes('interest'))) return 'rejected';
+            
+            // Check for application status
+            if (lower === 'received' || 
+                lower.includes('job') || 
+                lower.includes('career') || 
+                lower.includes('opportunity') || 
+                lower.includes('position') ||
+                lower.includes('application') || 
+                lower.includes('confirmation') || 
+                lower.includes('notification') || 
+                lower.includes('recruitment') ||
+                lower.includes('response') ||
+                lower.includes('status') ||
+                lower.includes('update') ||
+                lower.includes('alert') ||
+                lower.includes('opening')) {
+                
+                // Don't categorize as received if it's a rejection
+                if (lower.includes('unfortunately') || 
+                    lower.includes('not moving forward') ||
+                    (lower.includes('thank') && lower.includes('interest'))) {
+                    return 'rejected';
                 }
+                
+                return 'received';
+            }
+            
+            // Return null for any other types of emails
+            return null;
+        }
 
+        function createCharts(data) {
+            try {
                 const processedData = data.filter(item => {
                     const category = categorizeRelation(item.relation_id);
                     return category !== null;
@@ -500,7 +450,7 @@
                         scales: {
                             y: {
                                 min: 0,
-                                max: 50, // Adjusted for better visualization
+                                max: 50,
                                 ticks: { 
                                     callback: value => value + '%',
                                     stepSize: 5
@@ -528,12 +478,34 @@
                         }
                     }
                 });
+
+                // Hide loading spinners after charts are created
+                ['activityChart', 'pipelineChart', 'responseChart'].forEach(id => {
+                    hideLoading(id);
+                });
             } catch (error) {
-                showError(`Failed to load or process data: ${error.message}`);
+                showError(`Failed to create charts: ${error.message}`);
             }
         }
 
-        document.addEventListener('DOMContentLoaded', initCharts);
+        // Load data and initialize charts
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', '_data/email_trends.json', true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    try {
+                        const data = JSON.parse(xhr.responseText);
+                        createCharts(data);
+                    } catch (error) {
+                        showError(`Failed to parse email trends data: ${error.message}`);
+                    }
+                } else {
+                    showError(`Failed to load email trends data. Status: ${xhr.status}`);
+                }
+            }
+        };
+        xhr.send();
     </script>
 </body>
 </html>
