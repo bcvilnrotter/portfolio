@@ -351,45 +351,43 @@
 
         async function createCharts(data) {
             try {
-                const CHUNK_SIZE = 500; // Increased chunk size for better performance
-                const processedData = new Map(); // Use Map for better memory efficiency
-                let nextIndex = 0;
+                // Sort data by date in descending order
+                data.sort((a, b) => new Date(b.sent_time) - new Date(a.sent_time));
+                
+                // Get date ranges
+                const now = new Date();
+                const threeMonthsAgo = new Date(now.setMonth(now.getMonth() - 3));
+                const sixMonthsAgo = new Date(now.setMonth(now.getMonth() - 3)); // -6 months total
+                
+                // Process recent data only
+                const processedData = new Map();
                 let totalProcessed = 0;
-
-                // Process data in chunks with better progress tracking
-                while (nextIndex !== null) {
-                    try {
-                        nextIndex = await processDataChunk(data, nextIndex, CHUNK_SIZE, (chunk) => {
-                            // Store processed data efficiently
-                            chunk.forEach(({date, category}) => {
-                                if (!processedData.has(date)) {
-                                    processedData.set(date, {
-                                        received: 0,
-                                        interview: 0,
-                                        offer: 0,
-                                        rejected: 0
-                                    });
-                                }
-                                processedData.get(date)[category]++;
-                            });
-                            
-                            totalProcessed += chunk.length;
-                            const progress = Math.min(100, Math.round((totalProcessed / data.length) * 100));
-                            
-                            // Update all loading indicators
-                            document.querySelectorAll('.loading div:last-child').forEach(el => {
-                                el.textContent = `Processing data... ${progress}% (${totalProcessed.toLocaleString()} / ${data.length.toLocaleString()} records)`;
-                            });
-                        });
-                    } catch (err) {
-                        console.error('Error in chunk processing:', err);
-                        showError('Error processing data chunk. Attempting to continue...');
+                
+                // Process data with date filtering
+                data.forEach(item => {
+                    const itemDate = new Date(item.sent_time);
+                    if (itemDate >= threeMonthsAgo) {
+                        const date = item.sent_time.split('T')[0];
+                        const category = categorizeRelation(item.relation_id);
+                        
+                        if (category) {
+                            if (!processedData.has(date)) {
+                                processedData.set(date, {
+                                    received: 0,
+                                    interview: 0,
+                                    offer: 0,
+                                    rejected: 0
+                                });
+                            }
+                            processedData.get(date)[category]++;
+                            totalProcessed++;
+                        }
                     }
-                }
-
-                // Clear original data reference to free memory
-                data.length = 0;
-
+                });
+                
+                console.log(`Processed ${totalProcessed} records from the last 3 months`);
+                
+                // Get sorted dates for the last 3 months
                 const dates = [...processedData.keys()].sort();
                 const relations = ['received', 'interview', 'offer', 'rejected'];
 
@@ -428,12 +426,35 @@
                     }
                 });
 
-                // Pipeline Chart with Map data structure
+                // Process pipeline data (6 months)
+                const pipelineData = new Map();
+                data.forEach(item => {
+                    const itemDate = new Date(item.sent_time);
+                    if (itemDate >= sixMonthsAgo) {
+                        const date = item.sent_time.split('T')[0];
+                        const category = categorizeRelation(item.relation_id);
+                        
+                        if (category) {
+                            if (!pipelineData.has(date)) {
+                                pipelineData.set(date, {
+                                    received: 0,
+                                    interview: 0,
+                                    offer: 0,
+                                    rejected: 0
+                                });
+                            }
+                            pipelineData.get(date)[category]++;
+                        }
+                    }
+                });
+
+                // Calculate cumulative totals for pipeline
+                const pipelineDates = [...pipelineData.keys()].sort();
                 const cumulativeData = {};
                 relations.forEach(relation => {
                     let runningTotal = 0;
-                    cumulativeData[relation] = dates.map(date => {
-                        const dailyCount = processedData.get(date)[relation];
+                    cumulativeData[relation] = pipelineDates.map(date => {
+                        const dailyCount = pipelineData.get(date)[relation] || 0;
                         runningTotal += dailyCount;
                         return runningTotal;
                     });
@@ -442,7 +463,7 @@
                 new Chart(document.getElementById('pipelineChart').getContext('2d'), {
                     type: 'line',
                     data: {
-                        labels: dates,
+                        labels: pipelineDates,
                         datasets: relations.map(relation => ({
                             label: relation.charAt(0).toUpperCase() + relation.slice(1),
                             borderColor: colors[relation],
@@ -471,26 +492,41 @@
                     }
                 });
 
-                // Response Rate Chart with Map data structure
+                // Calculate weekly response rates (using last 6 months for meaningful trends)
                 const weeklyData = {};
-                dates.forEach(date => {
-                    const dateObj = new Date(date);
-                    const week = `${dateObj.getFullYear()}-W${Math.ceil((dateObj.getDate() + dateObj.getDay()) / 7)}`;
-                    const dayData = processedData.get(date);
-                    
-                    if (!weeklyData[week]) {
-                        weeklyData[week] = { total: 0, positive: 0 };
+                data.forEach(item => {
+                    const itemDate = new Date(item.sent_time);
+                    if (itemDate >= sixMonthsAgo) {
+                        const week = `${itemDate.getFullYear()}-W${Math.ceil((itemDate.getDate() + itemDate.getDay()) / 7)}`;
+                        const category = categorizeRelation(item.relation_id);
+                        
+                        if (category) {
+                            if (!weeklyData[week]) {
+                                weeklyData[week] = { total: 0, positive: 0 };
+                            }
+                            weeklyData[week].total++;
+                            if (category === 'interview' || category === 'offer') {
+                                weeklyData[week].positive++;
+                            }
+                        }
                     }
-                    
-                    // Sum up all categories for total
-                    const total = relations.reduce((sum, rel) => sum + dayData[rel], 0);
-                    weeklyData[week].total += total;
-                    
-                    // Sum up positive responses (interviews and offers)
-                    weeklyData[week].positive += dayData.interview + dayData.offer;
                 });
 
-                const weeks = Object.keys(weeklyData).sort();
+                // Only show weeks with data
+                Object.keys(weeklyData).forEach(week => {
+                    if (weeklyData[week].total === 0) {
+                        delete weeklyData[week];
+                    }
+                });
+
+                // Sort weeks and limit to last 6 months
+                const weeks = Object.keys(weeklyData)
+                    .sort()
+                    .filter(week => {
+                        const [year, w] = week.split('-W');
+                        const weekDate = new Date(year, 0, 1 + (w - 1) * 7);
+                        return weekDate >= sixMonthsAgo;
+                    });
                 const responseRate = weeks.map(week => {
                     const rate = (weeklyData[week].positive / weeklyData[week].total) * 100;
                     return rate;
