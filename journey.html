@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Journey - Data Science & Machine Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <style>
+        /* Keeping existing styles */
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --text-color: #2c3e50;
+            --background-color: #f8f9fa;
+            --card-background: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            padding-bottom: 4rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            padding: 3rem 0;
+            background: linear-gradient(135deg, rgba(44, 62, 80, 0.1) 0%, rgba(52, 152, 219, 0.1) 100%);
+            margin-bottom: 2rem;
+        }
+
+        .title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.3s backwards;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .chart-container {
+            background: var(--card-background);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            animation: fadeIn 1s ease-out;
+            height: 400px;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .chart-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(52, 152, 219, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--secondary-color);
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .chart-container h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .error-message {
+            color: var(--accent-color);
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 1px solid var(--accent-color);
+            background-color: rgba(231, 76, 60, 0.1);
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .title {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .chart-container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1 class="title">My Journey</h1>
+            <p class="subtitle">Tracking My Progress in Data Science & Machine Learning</p>
+            <a href="/" class="back-link">
+                <i class="fas fa-arrow-left"></i>
+                Back to Home
+            </a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="chart-container">
+            <h2>Application Activity Overview</h2>
+            <canvas id="activityChart"></canvas>
+            <div class="loading">
+                <div class="loading-spinner"></div>
+                <div>Loading chart...</div>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <h2>Application Pipeline</h2>
+            <canvas id="pipelineChart"></canvas>
+            <div class="loading">
+                <div class="loading-spinner"></div>
+                <div>Loading chart...</div>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <h2>Weekly Response Rate</h2>
+            <canvas id="responseChart"></canvas>
+            <div class="loading">
+                <div class="loading-spinner"></div>
+                <div>Loading chart...</div>
+            </div>
+        </div>
+    </div>
+
+    <footer style="text-align: center; padding: 1rem; color: var(--text-color); opacity: 0.8; font-size: 0.9rem; position: fixed; bottom: 0; width: 100%; background: linear-gradient(to bottom, transparent, var(--background-color) 20%); backdrop-filter: blur(5px); border-top: 1px solid rgba(0,0,0,0.1);">
+        Page designed and generated by Cline AI Assistant
+    </footer>
+
+    <script>
+        // Store chart instances for cleanup
+        let charts = {
+            activityChart: null,
+            pipelineChart: null,
+            responseChart: null
+        };
+
+        function showError(message) {
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.textContent = message;
+            document.body.appendChild(errorDiv);
+            console.error(message);
+        }
+
+        function hideLoading(chartId) {
+            const container = document.getElementById(chartId).closest('.chart-container');
+            const loading = container.querySelector('.loading');
+            loading.style.display = 'none';
+        }
+
+        // Clean up existing charts
+        function destroyCharts() {
+            Object.values(charts).forEach(chart => {
+                if (chart) {
+                    chart.destroy();
+                }
+            });
+            charts = {
+                activityChart: null,
+                pipelineChart: null,
+                responseChart: null
+            };
+        }
+
+        const colors = {
+            received: 'rgba(75,192,192,0.6)',
+            rejected: 'rgba(255,99,132,0.6)',
+            interview: 'rgba(54,162,235,0.6)',
+            offer: 'rgba(255,206,86,0.6)',
+            default: 'rgba(201,203,207,0.4)'
+        };
+
+        function categorizeRelation(relation_id) {
+            if (!relation_id) return null;
+            const lower = relation_id.toLowerCase();
+            
+            // Skip non-relevant emails
+            if (lower === 'no email trend' || lower === 'scam') return null;
+            
+            // Check for interview status
+            if (lower === 'interview' || 
+                lower.includes('interview') || 
+                lower.includes('meeting') ||
+                lower.includes('schedule') ||
+                (lower.includes('next') && lower.includes('steps'))) return 'interview';
+            
+            // Check for offer status
+            if (lower === 'offer' || 
+                lower.includes('offer') || 
+                lower.includes('congratulation') ||
+                lower.includes('welcome aboard') ||
+                lower.includes('compensation')) return 'offer';
+            
+            // Check for rejection status
+            if (lower === 'rejected' || 
+                lower.includes('rejected') || 
+                lower.includes('rejection') || 
+                lower.includes('decline') ||
+                lower.includes('not moving forward') ||
+                lower.includes('other candidates') ||
+                lower.includes('unfortunately') ||
+                (lower.includes('thank') && lower.includes('interest'))) return 'rejected';
+            
+            // Check for application status
+            if (lower === 'received' || 
+                lower.includes('job') || 
+                lower.includes('career') || 
+                lower.includes('opportunity') || 
+                lower.includes('position') ||
+                lower.includes('application') || 
+                lower.includes('confirmation') || 
+                lower.includes('notification') || 
+                lower.includes('recruitment') ||
+                lower.includes('response') ||
+                lower.includes('status') ||
+                lower.includes('update') ||
+                lower.includes('alert') ||
+                lower.includes('opening')) {
+                
+                // Don't categorize as received if it's a rejection
+                if (lower.includes('unfortunately') || 
+                    lower.includes('not moving forward') ||
+                    (lower.includes('thank') && lower.includes('interest'))) {
+                    return 'rejected';
+                }
+                
+                return 'received';
+            }
+            
+            // Return null for any other types of emails
+            return null;
+        }
+
+        async function createCharts(data, isTestData = false) {
+            try {
+                console.log(`Starting chart creation with ${isTestData ? 'test' : 'production'} data (${data.length} records)`);
+                
+                // Validate data structure
+                if (!Array.isArray(data)) {
+                    throw new Error('Data must be an array');
+                }
+                
+                // Validate data items
+                const validData = data.filter(item => {
+                    return item && 
+                           typeof item === 'object' && 
+                           typeof item.sent_time === 'string' &&
+                           typeof item.relation_id === 'string';
+                });
+                
+                console.log('Valid data items:', validData.length);
+                
+                if (validData.length === 0) {
+                    throw new Error('No valid data items found');
+                }
+                
+                // Sort data by date in descending order
+                validData.sort((a, b) => new Date(b.sent_time) - new Date(a.sent_time));
+                
+                // Get date ranges with proper date handling
+                const now = new Date();
+                const threeMonthsAgo = new Date();
+                threeMonthsAgo.setMonth(now.getMonth() - 3);
+                
+                const sixMonthsAgo = new Date();
+                sixMonthsAgo.setMonth(now.getMonth() - 6);
+                
+                console.log('Date ranges:', {
+                    now: now.toISOString(),
+                    threeMonthsAgo: threeMonthsAgo.toISOString(),
+                    sixMonthsAgo: sixMonthsAgo.toISOString()
+                });
+                
+                // Process recent data with validation
+                const processedData = new Map();
+                let totalProcessed = 0;
+                let skippedItems = 0;
+                
+                // Process data with date filtering and validation
+                validData.forEach(item => {
+                    if (!item.sent_time) {
+                        skippedItems++;
+                        return;
+                    }
+                    
+                    const itemDate = new Date(item.sent_time);
+                    if (itemDate >= threeMonthsAgo) {
+                        const date = item.sent_time.split('T')[0];
+                        const category = categorizeRelation(item.relation_id);
+                        
+                        if (category) {
+                            if (!processedData.has(date)) {
+                                processedData.set(date, {
+                                    received: 0,
+                                    interview: 0,
+                                    offer: 0,
+                                    rejected: 0
+                                });
+                            }
+                            processedData.get(date)[category]++;
+                            totalProcessed++;
+                        }
+                    }
+                });
+                
+                console.log(`Processing summary:
+                    - Total valid records: ${validData.length}
+                    - Processed records (3 months): ${totalProcessed}
+                    - Skipped records: ${skippedItems}
+                    - Unique dates: ${processedData.size}`);
+                
+                // Get sorted dates with validation
+                const dates = [...processedData.keys()].sort();
+                if (dates.length === 0) {
+                    throw new Error('No valid dates found in the processed data');
+                }
+                console.log(`Date range: ${dates[0]} to ${dates[dates.length - 1]}`);
+                const relations = ['received', 'interview', 'offer', 'rejected'];
+
+                // Destroy existing charts before creating new ones
+                destroyCharts();
+
+                // Activity Chart with optimized data handling
+                charts.activityChart = new Chart(document.getElementById('activityChart').getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: dates,
+                        datasets: relations.map(relation => ({
+                            label: relation.charAt(0).toUpperCase() + relation.slice(1),
+                            backgroundColor: colors[relation],
+                            data: dates.map(date => processedData.get(date)[relation])
+                        }))
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: { display: true, text: 'Daily Application Activity' },
+                            legend: { position: 'top' }
+                        },
+                        scales: {
+                            x: { stacked: true },
+                            y: { stacked: true }
+                        },
+                        interaction: {
+                            mode: 'index',
+                            intersect: false
+                        },
+                        hover: {
+                            mode: 'nearest',
+                            intersect: true,
+                            animationDuration: 200
+                        }
+                    }
+                });
+
+                // Process pipeline data with validation and counting
+                const pipelineData = new Map();
+                let pipelineProcessed = 0;
+                validData.forEach(item => {
+                    try {
+                        const itemDate = new Date(item.sent_time);
+                        if (itemDate >= sixMonthsAgo) {
+                            const date = item.sent_time.split('T')[0];
+                            const category = categorizeRelation(item.relation_id);
+                            
+                            if (category) {
+                                if (!pipelineData.has(date)) {
+                                    pipelineData.set(date, {
+                                        received: 0,
+                                        interview: 0,
+                                        offer: 0,
+                                        rejected: 0
+                                    });
+                                }
+                                pipelineData.get(date)[category]++;
+                                pipelineProcessed++;
+                            }
+                        }
+                    } catch (err) {
+                        console.warn('Error processing pipeline item:', err);
+                    }
+                });
+
+                // Calculate cumulative totals with validation
+                const pipelineDates = [...pipelineData.keys()].sort();
+                console.log(`Pipeline data:
+                    - Processed records (6 months): ${pipelineProcessed}
+                    - Unique dates: ${pipelineData.size}
+                    - Date range: ${pipelineDates[0]} to ${pipelineDates[pipelineDates.length - 1]}`);
+                const cumulativeData = {};
+                relations.forEach(relation => {
+                    let runningTotal = 0;
+                    cumulativeData[relation] = pipelineDates.map(date => {
+                        const dailyCount = pipelineData.get(date)[relation] || 0;
+                        runningTotal += dailyCount;
+                        return runningTotal;
+                    });
+                });
+
+                charts.pipelineChart = new Chart(document.getElementById('pipelineChart').getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: pipelineDates,
+                        datasets: relations.map(relation => ({
+                            label: relation.charAt(0).toUpperCase() + relation.slice(1),
+                            borderColor: colors[relation],
+                            backgroundColor: colors[relation].replace('0.6', '0.1'),
+                            data: cumulativeData[relation],
+                            fill: true,
+                            tension: 0.4
+                        }))
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: { display: true, text: 'Cumulative Application Progress' },
+                            legend: { position: 'top' }
+                        },
+                        interaction: {
+                            mode: 'index',
+                            intersect: false
+                        },
+                        hover: {
+                            mode: 'nearest',
+                            intersect: true,
+                            animationDuration: 200
+                        }
+                    }
+                });
+
+                // Calculate weekly response rates with validation and counting
+                const weeklyData = {};
+                let weeklyProcessed = 0;
+                validData.forEach(item => {
+                    try {
+                        const itemDate = new Date(item.sent_time);
+                        if (itemDate >= sixMonthsAgo) {
+                            const week = `${itemDate.getFullYear()}-W${Math.ceil((itemDate.getDate() + itemDate.getDay()) / 7)}`;
+                            const category = categorizeRelation(item.relation_id);
+                            
+                            if (category) {
+                                if (!weeklyData[week]) {
+                                    weeklyData[week] = { total: 0, positive: 0 };
+                                }
+                                weeklyData[week].total++;
+                                if (category === 'interview' || category === 'offer') {
+                                    weeklyData[week].positive++;
+                                }
+                                weeklyProcessed++;
+                            }
+                        }
+                    } catch (err) {
+                        console.warn('Error processing weekly item:', err);
+                    }
+                });
+
+                console.log(`Weekly response data:
+                    - Processed records: ${weeklyProcessed}
+                    - Unique weeks: ${Object.keys(weeklyData).length}`);
+                
+                // Filter out weeks with no data and validate
+                const weeksWithData = Object.keys(weeklyData).filter(week => {
+                    return weeklyData[week] && weeklyData[week].total > 0;
+                });
+
+                if (weeksWithData.length === 0) {
+                    console.warn('No weekly data found after filtering');
+                }
+
+                // Sort and validate weeks with error handling
+                const weeks = weeksWithData
+                    .filter(week => {
+                        try {
+                            const [year, w] = week.split('-W');
+                            return !isNaN(parseInt(year)) && !isNaN(parseInt(w));
+                        } catch (err) {
+                            console.warn('Invalid week format:', week);
+                            return false;
+                        }
+                    })
+                    .sort()
+                    .filter(week => {
+                        const [year, w] = week.split('-W');
+                        const weekDate = new Date(year, 0, 1 + (w - 1) * 7);
+                        return weekDate >= sixMonthsAgo;
+                    });
+                const responseRate = weeks.map(week => {
+                    try {
+                        const { positive = 0, total = 0 } = weeklyData[week] || {};
+                        if (total === 0) return 0;
+                        const rate = (positive / total) * 100;
+                        // Ensure rate is between 0 and 100
+                        return Math.min(Math.max(isNaN(rate) ? 0 : rate, 0), 100);
+                    } catch (err) {
+                        console.warn('Error calculating response rate for week:', week, err);
+                        return 0;
+                    }
+                });
+
+                charts.responseChart = new Chart(document.getElementById('responseChart').getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: weeks,
+                        datasets: [{
+                            label: 'Positive Response Rate (%)',
+                            borderColor: colors.interview,
+                            backgroundColor: colors.interview.replace('0.6', '0.1'),
+                            data: responseRate,
+                            fill: true,
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: { display: true, text: 'Weekly Success Rate' },
+                            legend: { position: 'top' }
+                        },
+                        scales: {
+                            y: {
+                                min: 0,
+                                max: 50,
+                                ticks: { 
+                                    callback: value => value + '%',
+                                    stepSize: 5
+                                },
+                                grid: {
+                                    color: 'rgba(0, 0, 0, 0.1)',
+                                    drawBorder: false
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    color: 'rgba(0, 0, 0, 0.1)',
+                                    drawBorder: false
+                                }
+                            }
+                        },
+                        interaction: {
+                            mode: 'index',
+                            intersect: false
+                        },
+                        hover: {
+                            mode: 'nearest',
+                            intersect: true,
+                            animationDuration: 200
+                        }
+                    }
+                });
+
+                // Hide loading spinners after charts are created
+                ['activityChart', 'pipelineChart', 'responseChart'].forEach(id => {
+                    hideLoading(id);
+                });
+            } catch (error) {
+                showError(`Failed to create charts: ${error.message}`);
+            }
+        }
+
+        // Load and validate with test data first
+        async function loadData() {
+            try {
+                // First try loading test visualization data
+                const testResponse = await fetch('_data/email_trends_test.json');
+                if (!testResponse.ok) {
+                    throw new Error(`Failed to load test data: ${testResponse.status}`);
+                }
+                const testData = await testResponse.json();
+                console.log('Test data loaded successfully');
+                
+                // Process test data first
+                await createCharts(testData, true);
+                console.log('Charts created successfully with test data');
+                
+                try {
+                    // If test data works, try loading production data
+                    const prodResponse = await fetch('_data/email_trends.json');
+                    if (prodResponse.ok) {
+                        const prodData = await prodResponse.json();
+                        console.log('Production data loaded, updating charts...');
+                        await createCharts(prodData, false);
+                    } else {
+                        console.warn('Production data unavailable:', prodResponse.status);
+                        console.log('Continuing with test data visualization');
+                    }
+                } catch (error) {
+                    console.warn('Error loading production data:', error.message);
+                    console.log('Continuing with test data visualization');
+                }
+            } catch (error) {
+                showError(`Failed to load or process data: ${error.message}`);
+                console.error('Error:', error);
+            }
+        }
+
+        // Start with test data
+        loadData();
+    </script>
+</body>
+</html>
