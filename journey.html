@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
     <style>
+        /* Keeping existing styles */
         :root {
             --primary-color: #2c3e50;
             --secondary-color: #3498db;
@@ -227,6 +228,13 @@
     </footer>
 
     <script>
+        // Store chart instances for cleanup
+        let charts = {
+            activityChart: null,
+            pipelineChart: null,
+            responseChart: null
+        };
+
         function showError(message) {
             const errorDiv = document.createElement('div');
             errorDiv.className = 'error-message';
@@ -239,6 +247,20 @@
             const container = document.getElementById(chartId).closest('.chart-container');
             const loading = container.querySelector('.loading');
             loading.style.display = 'none';
+        }
+
+        // Clean up existing charts
+        function destroyCharts() {
+            Object.values(charts).forEach(chart => {
+                if (chart) {
+                    chart.destroy();
+                }
+            });
+            charts = {
+                activityChart: null,
+                pipelineChart: null,
+                responseChart: null
+            };
         }
 
         const colors = {
@@ -310,48 +332,9 @@
             return null;
         }
 
-        // Process data in chunks with memory optimization
-        function processDataChunk(data, startIndex, chunkSize, callback) {
-            return new Promise((resolve) => {
-                // Use requestAnimationFrame for better performance
-                requestAnimationFrame(async () => {
-                    try {
-                        const endIndex = Math.min(startIndex + chunkSize, data.length);
-                        const chunk = data.slice(startIndex, endIndex);
-                        
-                        // Process chunk with error handling
-                        const processedChunk = chunk.reduce((acc, item) => {
-                            try {
-                                const category = categorizeRelation(item.relation_id);
-                                if (category !== null) {
-                                    acc.push({
-                                        date: item.sent_time.split('T')[0],
-                                        category: category
-                                    });
-                                }
-                            } catch (err) {
-                                console.warn('Error processing item:', err);
-                            }
-                            return acc;
-                        }, []);
-
-                        callback(processedChunk);
-                        
-                        // Clear references to help garbage collection
-                        chunk.length = 0;
-                        
-                        resolve(endIndex < data.length ? endIndex : null);
-                    } catch (err) {
-                        console.error('Chunk processing error:', err);
-                        resolve(null);
-                    }
-                });
-            });
-        }
-
-        async function createCharts(data) {
+        async function createCharts(data, isTestData = false) {
             try {
-                console.log('Starting chart creation with data length:', data.length);
+                console.log(`Starting chart creation with ${isTestData ? 'test' : 'production'} data (${data.length} records)`);
                 
                 // Validate data structure
                 if (!Array.isArray(data)) {
@@ -435,9 +418,11 @@
                 console.log(`Date range: ${dates[0]} to ${dates[dates.length - 1]}`);
                 const relations = ['received', 'interview', 'offer', 'rejected'];
 
+                // Destroy existing charts before creating new ones
+                destroyCharts();
 
                 // Activity Chart with optimized data handling
-                new Chart(document.getElementById('activityChart').getContext('2d'), {
+                charts.activityChart = new Chart(document.getElementById('activityChart').getContext('2d'), {
                     type: 'bar',
                     data: {
                         labels: dates,
@@ -514,7 +499,7 @@
                     });
                 });
 
-                new Chart(document.getElementById('pipelineChart').getContext('2d'), {
+                charts.pipelineChart = new Chart(document.getElementById('pipelineChart').getContext('2d'), {
                     type: 'line',
                     data: {
                         labels: pipelineDates,
@@ -614,7 +599,7 @@
                     }
                 });
 
-                new Chart(document.getElementById('responseChart').getContext('2d'), {
+                charts.responseChart = new Chart(document.getElementById('responseChart').getContext('2d'), {
                     type: 'line',
                     data: {
                         labels: weeks,
@@ -675,52 +660,93 @@
             }
         }
 
-        // Load data with XMLHttpRequest for better local file support
-        function loadData() {
-            const xhr = new XMLHttpRequest();
-            xhr.open('GET', '_data/email_trends.json', true);
-            xhr.responseType = 'text';
-            
-            xhr.onprogress = function(e) {
-                if (e.lengthComputable) {
-                    const progress = Math.round((e.loaded / e.total) * 100);
-                    const sizeMB = (e.loaded / 1024 / 1024).toFixed(2);
-                    document.querySelectorAll('.loading div:last-child').forEach(el => {
-                        el.textContent = `Loading data... ${progress}% (${sizeMB} MB)`;
-                    });
-                }
-            };
-            
-            xhr.onload = async function() {
-                if (xhr.status === 200) {
-                    try {
-                        console.log('Data loaded successfully, parsing...');
-                        const data = JSON.parse(xhr.responseText);
-                        console.log(`Parsed ${data.length} records, creating charts...`);
-                        await createCharts(data);
-                    } catch (error) {
-                        showError(`Failed to parse data: ${error.message}`);
-                        console.error('Parse error:', error);
-                    }
-                } else {
-                    showError(`Failed to load data. Status: ${xhr.status}`);
-                }
-            };
-            
-            xhr.onerror = function() {
-                showError('Failed to load data. Please check your connection and file path.');
-                console.error('XHR error:', xhr.statusText);
-            };
-            
+        // Load and test data handling
+        async function loadData() {
             try {
-                xhr.send();
+                // First load test data to verify functionality
+                const testResponse = await fetch('_data/email_trends_test.json');
+                if (!testResponse.ok) throw new Error(`HTTP error! status: ${testResponse.status}`);
+                const testData = await testResponse.json();
+                
+                // Generate additional test data to simulate large dataset
+                const now = new Date();
+                const sixMonthsAgo = new Date(now);
+                sixMonthsAgo.setMonth(now.getMonth() - 6);
+                
+                const expandedData = [];
+                const categories = ['Job Application Response', 'Interview Scheduled', 'Offer Letter', 'Application Rejected'];
+                
+                // Generate one entry per day for the last 6 months
+                for (let d = new Date(sixMonthsAgo); d <= now; d.setDate(d.getDate() + 1)) {
+                    // Add 3-5 entries per day
+                    const entriesPerDay = Math.floor(Math.random() * 3) + 3;
+                    for (let i = 0; i < entriesPerDay; i++) {
+                        expandedData.push({
+                            sent_time: new Date(d).toISOString(),
+                            relation_id: categories[Math.floor(Math.random() * categories.length)]
+                        });
+                    }
+                }
+                
+                // Combine test data with generated data
+                const combinedData = [...testData, ...expandedData];
+                console.log(`Testing with ${combinedData.length} records...`);
+                
+                // Process the combined dataset
+                await createCharts(combinedData, true);
+                
+                try {
+                    // Attempt to load production data
+                    const prodResponse = await fetch('_data/email_trends.json');
+                    if (!prodResponse.ok) throw new Error(`HTTP error! status: ${prodResponse.status}`);
+                    
+                    // Stream and parse the production data
+                    const reader = prodResponse.body.getReader();
+                    const decoder = new TextDecoder();
+                    let buffer = '';
+                    let lastUpdate = Date.now();
+                    const updateInterval = 500; // Update progress every 500ms
+                    
+                    while (true) {
+                        const {done, value} = await reader.read();
+                        if (done) break;
+                        
+                        buffer += decoder.decode(value, {stream: true});
+                        
+                        // Update progress at most every 500ms
+                        const now = Date.now();
+                        if (now - lastUpdate > updateInterval) {
+                            document.querySelectorAll('.loading div:last-child').forEach(el => {
+                                el.textContent = `Loading production data... ${(buffer.length / 1024 / 1024).toFixed(2)} MB`;
+                            });
+                            lastUpdate = now;
+                            // Give UI a chance to update
+                            await new Promise(resolve => setTimeout(resolve, 0));
+                        }
+                    }
+                    
+                    try {
+                        const prodData = JSON.parse(buffer);
+                        buffer = ''; // Clear buffer
+                        
+                        // Destroy existing charts before creating new ones
+                        destroyCharts();
+                        await createCharts(prodData, false);
+                    } catch (error) {
+                        console.error('Production data error:', error);
+                        showError('Using test data visualization - production data unavailable');
+                    }
+                } catch (error) {
+                    console.error('Failed to load production data:', error);
+                    showError('Using test data visualization - production data unavailable');
+                }
             } catch (error) {
-                showError(`Failed to start request: ${error.message}`);
-                console.error('Send error:', error);
+                showError(`Failed to load data: ${error.message}`);
+                console.error('Load error:', error);
             }
         }
 
-        // Initialize loading
+        // Start with test data
         loadData();
     </script>
 </body>
