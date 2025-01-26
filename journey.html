@@ -310,15 +310,43 @@
             return null;
         }
 
-        function createCharts(data) {
+        // Process data in chunks to avoid blocking the main thread
+        function processDataChunk(data, startIndex, chunkSize, callback) {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    const endIndex = Math.min(startIndex + chunkSize, data.length);
+                    const chunk = data.slice(startIndex, endIndex);
+                    const processedChunk = chunk.filter(item => {
+                        const category = categorizeRelation(item.relation_id);
+                        return category !== null;
+                    });
+                    callback(processedChunk);
+                    resolve(endIndex < data.length ? endIndex : null);
+                }, 0);
+            });
+        }
+
+        async function createCharts(data) {
             try {
-                const processedData = data.filter(item => {
-                    const category = categorizeRelation(item.relation_id);
-                    return category !== null;
-                });
+                const CHUNK_SIZE = 100; // Process 100 items at a time
+                let processedData = [];
+                let nextIndex = 0;
+
+                // Process data in chunks
+                while (nextIndex !== null) {
+                    nextIndex = await processDataChunk(data, nextIndex, CHUNK_SIZE, (chunk) => {
+                        processedData = processedData.concat(chunk);
+                        // Update loading message to show progress
+                        const progress = Math.min(100, Math.round((nextIndex / data.length) * 100));
+                        document.querySelectorAll('.loading div:last-child').forEach(el => {
+                            el.textContent = `Processing data... ${progress}%`;
+                        });
+                    });
+                }
 
                 const dates = [...new Set(processedData.map(item => item.sent_time.split('T')[0]))].sort();
                 const relations = ['received', 'interview', 'offer', 'rejected'];
+
 
                 // Activity Chart with enhanced interactivity
                 new Chart(document.getElementById('activityChart').getContext('2d'), {
@@ -488,27 +516,43 @@
             }
         }
 
-        // Load data and initialize charts
-        const xhr = new XMLHttpRequest();
-xhr.open('GET', './_data/email_trends.json', true);
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4) {
+        // Load data with XMLHttpRequest for better local file support
+        function loadData() {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', './_data/email_trends.json', true);
+            
+            xhr.onprogress = function(e) {
+                if (e.lengthComputable) {
+                    const progress = Math.round((e.loaded / e.total) * 100);
+                    document.querySelectorAll('.loading div:last-child').forEach(el => {
+                        el.textContent = `Loading data... ${progress}%`;
+                    });
+                }
+            };
+            
+            xhr.onload = async function() {
                 if (xhr.status === 200) {
                     try {
-                        console.log('Raw response:', xhr.responseText);
                         const data = JSON.parse(xhr.responseText);
-                        console.log('Parsed data:', data);
-                        createCharts(data);
+                        await createCharts(data);
                     } catch (error) {
-                        showError(`Failed to parse email trends data: ${error.message}`);
+                        showError(`Failed to parse data: ${error.message}`);
                         console.error('Parse error:', error);
                     }
                 } else {
-                    showError(`Failed to load email trends data. Status: ${xhr.status}`);
+                    showError(`Failed to load data. Status: ${xhr.status}`);
                 }
-            }
-        };
-        xhr.send();
+            };
+            
+            xhr.onerror = function() {
+                showError('Failed to load data. Please check your connection.');
+            };
+            
+            xhr.send();
+        }
+
+        // Initialize loading
+        loadData();
     </script>
 </body>
 </html>
