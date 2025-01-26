@@ -490,15 +490,18 @@
 
         // Load data and initialize charts
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', '_data/email_trends.json', true);
+xhr.open('GET', './_data/email_trends.json', true);
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4) {
                 if (xhr.status === 200) {
                     try {
+                        console.log('Raw response:', xhr.responseText);
                         const data = JSON.parse(xhr.responseText);
+                        console.log('Parsed data:', data);
                         createCharts(data);
                     } catch (error) {
                         showError(`Failed to parse email trends data: ${error.message}`);
+                        console.error('Parse error:', error);
                     }
                 } else {
                     showError(`Failed to load email trends data. Status: ${xhr.status}`);
