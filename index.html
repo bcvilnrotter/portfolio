@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Me - Digital Forensics & Data Science</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
             --primary-color: #2c3e50;
@@ -88,6 +89,54 @@
 
         .card:hover {
             transform: translateY(-5px);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .social-link {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            transition: all 0.3s ease;
+            opacity: 0.9;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .social-link:hover {
+            opacity: 1;
+            transform: translateY(-3px);
+            color: var(--secondary-color);
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .social-link span {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .social-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            
+            .social-link {
+                width: 80%;
+                justify-content: center;
+            }
         }
 
         .skills {
@@ -185,6 +234,21 @@
                 <div class="card">
                     <p>Thank you for visiting my portfolio. I am an incident response analyst with a decade of experience in Digital Forensics and Incident Response (DFIR), currently transitioning into the exciting world of Data Science and Machine Learning.</p>
                     <p>With over a decade of Python programming experience, I specialize in developing automations and forensic tools that enhance investigative efficiency.</p>
+                </div>
+
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/bcvilnrotter/" class="social-link" target="_blank">
+                        <i class="fab fa-linkedin"></i>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="https://www.kaggle.com/brianvilnrotter" class="social-link" target="_blank">
+                        <i class="fab fa-kaggle"></i>
+                        <span>Kaggle</span>
+                    </a>
+                    <a href="https://github.com/bcvilnrotter" class="social-link" target="_blank">
+                        <i class="fab fa-github"></i>
+                        <span>GitHub</span>
+                    </a>
                 </div>
 
                 <div class="skills">
