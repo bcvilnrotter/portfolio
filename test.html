@@ -1,8 +1,70 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Chart Test</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Tracking Charts</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --text-color: #2c3e50;
+            --background-color: #f8f9fa;
+            --card-background: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .title {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            animation: fadeInDown 1s ease-out;
+            text-align: center;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.3s backwards;
+            text-align: center;
+        }
+
+        .card {
+            background: var(--card-background);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+            animation: fadeIn 1s ease-out 0.6s backwards;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
         .error-message {
             color: red;
             padding: 10px;
@@ -10,18 +72,86 @@
             border: 1px solid red;
             background-color: #ffe6e6;
         }
+
         canvas {
             max-height: 400px;
         }
+
         .chart-container {
             margin-bottom: 40px;
             height: 400px;
             position: relative;
+            background: var(--card-background);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .chart-container:hover {
+            transform: translateY(-3px);
+        }
+
+        .chart-container h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .title {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>Application Tracking Charts</h1>
+    <div class="container">
+        <h1 class="title">Application Tracking Charts</h1>
+        <p class="subtitle">Testing Data Visualization</p>
+        
+        <div class="card">
+            <p>This page tests the visualization of application tracking data, ensuring graphs render correctly with sample data before implementing with real data.</p>
+        </div>
 
     <div class="chart-container">
         <h2>Application Activity Overview</h2>
@@ -48,21 +178,22 @@
             console.error(message);
         }
 
-        // Sample data for testing
-        const sampleData = [
-            { sent_time: "2024-12-01T10:00:00.000-05:00", relation_id: "received" },
-            { sent_time: "2024-12-01T11:00:00.000-05:00", relation_id: "interview" },
-            { sent_time: "2024-12-01T12:00:00.000-05:00", relation_id: "offer" },
-            { sent_time: "2024-12-01T13:00:00.000-05:00", relation_id: "rejected" },
-            { sent_time: "2024-12-02T10:00:00.000-05:00", relation_id: "Job Application Response" },
-            { sent_time: "2024-12-02T11:00:00.000-05:00", relation_id: "Interview Invitation" },
-            { sent_time: "2024-12-02T12:00:00.000-05:00", relation_id: "Job Offer" },
-            { sent_time: "2024-12-02T13:00:00.000-05:00", relation_id: "Application Rejected" },
-            { sent_time: "2024-12-03T10:00:00.000-05:00", relation_id: "No Email Trend" }
-        ];
-
         document.addEventListener("DOMContentLoaded", function() {
             try {
+                let data = [
+    {"sent_time":"2024-12-01T10:00:00.000-05:00","relation_id":"received"},
+    {"sent_time":"2024-12-01T11:00:00.000-05:00","relation_id":"interview"},
+    {"sent_time":"2024-12-01T12:00:00.000-05:00","relation_id":"offer"},
+    {"sent_time":"2024-12-01T13:00:00.000-05:00","relation_id":"rejected"},
+    {"sent_time":"2024-12-02T10:00:00.000-05:00","relation_id":"Job Application Response"},
+    {"sent_time":"2024-12-02T11:00:00.000-05:00","relation_id":"Interview Invitation"},
+    {"sent_time":"2024-12-02T12:00:00.000-05:00","relation_id":"Job Offer"},
+    {"sent_time":"2024-12-02T13:00:00.000-05:00","relation_id":"Application Rejected"},
+    {"sent_time":"2024-12-03T10:00:00.000-05:00","relation_id":"No Email Trend"},
+    {"sent_time":"2024-12-03T11:00:00.000-05:00","relation_id":"Job Application Confirmation"},
+    {"sent_time":"2024-12-03T12:00:00.000-05:00","relation_id":"Interview Scheduled"},
+    {"sent_time":"2024-12-03T13:00:00.000-05:00","relation_id":"Rejection Notice"}
+];
                 const colors = {
                     received: 'rgba(75,192,192,0.6)',    // Teal
                     rejected: 'rgba(255,99,132,0.6)',    // Red
@@ -101,7 +232,7 @@
                 }
 
                 // Pre-process data to remove uncategorized items
-                const processedData = sampleData.filter(item => {
+                const processedData = data.filter(item => {
                     const category = categorizeRelation(item.relation_id);
                     return category !== null;
                 });
@@ -235,9 +366,9 @@
                         }
                     }
                 });
-            } catch (error) {
-                showError(`Failed to load or process data: ${error.message}`);
-            }
+                    } catch (error) {
+                        showError(`Failed to load or process data: ${error.message}`);
+                    }
         });
     </script>
 </body>

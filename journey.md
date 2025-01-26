@@ -186,8 +186,196 @@ permalink: /journey/
             document.body.appendChild(errorDiv);
             console.error(message);
         }
+---
+layout: default
+title: "My Journey"
+permalink: /journey/
+---
 
-        document.addEventListener("DOMContentLoaded", function() {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --text-color: #2c3e50;
+            --background-color: #f8f9fa;
+            --card-background: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .title {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            animation: fadeInDown 1s ease-out;
+            text-align: center;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.3s backwards;
+            text-align: center;
+        }
+
+        .card {
+            background: var(--card-background);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+            animation: fadeIn 1s ease-out 0.6s backwards;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .error-message {
+            color: red;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid red;
+            background-color: #ffe6e6;
+        }
+
+        canvas {
+            max-height: 400px;
+        }
+
+        .chart-container {
+            margin-bottom: 40px;
+            height: 400px;
+            position: relative;
+            background: var(--card-background);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .chart-container:hover {
+            transform: translateY(-3px);
+        }
+
+        .chart-container h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .title {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">My Journey</h1>
+        <p class="subtitle">Tracking My Progress in Data Science & Machine Learning</p>
+        
+        <div class="card">
+            <p>This page visualizes my journey transitioning into Data Science, tracking application metrics and progress over time. The graphs below show various aspects of my job search process, from daily activities to cumulative progress and success rates.</p>
+        </div>
+
+        <!-- Application Activity Overview -->
+        <div class="chart-container">
+            <h2>Application Activity Overview</h2>
+            <canvas id="activityChart"></canvas>
+        </div>
+
+        <!-- Application Success Pipeline -->
+        <div class="chart-container">
+            <h2>Application Pipeline</h2>
+            <canvas id="pipelineChart"></canvas>
+        </div>
+
+        <!-- Weekly Response Rate -->
+        <div class="chart-container">
+            <h2>Weekly Response Rate</h2>
+            <canvas id="responseChart"></canvas>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <script>
+        function showError(message) {
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.textContent = message;
+            document.body.appendChild(errorDiv);
+            console.error(message);
+        }
+
+        document.addEventListener("DOMContentLoaded", async function() {
             try {
                 let data = {{ site.data.email_trends | jsonify }};
                 if (!data) {
