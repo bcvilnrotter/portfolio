@@ -589,12 +589,13 @@
                     });
                 const responseRate = weeks.map(week => {
                     try {
-                        const { positive, total } = weeklyData[week];
+                        const { positive = 0, total = 0 } = weeklyData[week] || {};
                         if (total === 0) return 0;
                         const rate = (positive / total) * 100;
-                        return isNaN(rate) ? 0 : rate;
+                        // Ensure rate is between 0 and 100
+                        return Math.min(Math.max(isNaN(rate) ? 0 : rate, 0), 100);
                     } catch (err) {
-                        console.warn('Error calculating response rate for week:', week);
+                        console.warn('Error calculating response rate for week:', week, err);
                         return 0;
                     }
                 });
@@ -660,89 +661,39 @@
             }
         }
 
-        // Load and test data handling
+        // Load and validate with test data first
         async function loadData() {
             try {
-                // First load test data to verify functionality
+                // First try loading test visualization data
                 const testResponse = await fetch('_data/email_trends_test.json');
-                if (!testResponse.ok) throw new Error(`HTTP error! status: ${testResponse.status}`);
-                const testData = await testResponse.json();
-                
-                // Generate additional test data to simulate large dataset
-                const now = new Date();
-                const sixMonthsAgo = new Date(now);
-                sixMonthsAgo.setMonth(now.getMonth() - 6);
-                
-                const expandedData = [];
-                const categories = ['Job Application Response', 'Interview Scheduled', 'Offer Letter', 'Application Rejected'];
-                
-                // Generate one entry per day for the last 6 months
-                for (let d = new Date(sixMonthsAgo); d <= now; d.setDate(d.getDate() + 1)) {
-                    // Add 3-5 entries per day
-                    const entriesPerDay = Math.floor(Math.random() * 3) + 3;
-                    for (let i = 0; i < entriesPerDay; i++) {
-                        expandedData.push({
-                            sent_time: new Date(d).toISOString(),
-                            relation_id: categories[Math.floor(Math.random() * categories.length)]
-                        });
-                    }
+                if (!testResponse.ok) {
+                    throw new Error(`Failed to load test data: ${testResponse.status}`);
                 }
+                const testData = await testResponse.json();
+                console.log('Test data loaded successfully');
                 
-                // Combine test data with generated data
-                const combinedData = [...testData, ...expandedData];
-                console.log(`Testing with ${combinedData.length} records...`);
-                
-                // Process the combined dataset
-                await createCharts(combinedData, true);
+                // Process test data first
+                await createCharts(testData, true);
+                console.log('Charts created successfully with test data');
                 
                 try {
-                    // Attempt to load production data
+                    // If test data works, try loading production data
                     const prodResponse = await fetch('_data/email_trends.json');
-                    if (!prodResponse.ok) throw new Error(`HTTP error! status: ${prodResponse.status}`);
-                    
-                    // Stream and parse the production data
-                    const reader = prodResponse.body.getReader();
-                    const decoder = new TextDecoder();
-                    let buffer = '';
-                    let lastUpdate = Date.now();
-                    const updateInterval = 500; // Update progress every 500ms
-                    
-                    while (true) {
-                        const {done, value} = await reader.read();
-                        if (done) break;
-                        
-                        buffer += decoder.decode(value, {stream: true});
-                        
-                        // Update progress at most every 500ms
-                        const now = Date.now();
-                        if (now - lastUpdate > updateInterval) {
-                            document.querySelectorAll('.loading div:last-child').forEach(el => {
-                                el.textContent = `Loading production data... ${(buffer.length / 1024 / 1024).toFixed(2)} MB`;
-                            });
-                            lastUpdate = now;
-                            // Give UI a chance to update
-                            await new Promise(resolve => setTimeout(resolve, 0));
-                        }
-                    }
-                    
-                    try {
-                        const prodData = JSON.parse(buffer);
-                        buffer = ''; // Clear buffer
-                        
-                        // Destroy existing charts before creating new ones
-                        destroyCharts();
+                    if (prodResponse.ok) {
+                        const prodData = await prodResponse.json();
+                        console.log('Production data loaded, updating charts...');
                         await createCharts(prodData, false);
-                    } catch (error) {
-                        console.error('Production data error:', error);
-                        showError('Using test data visualization - production data unavailable');
+                    } else {
+                        console.warn('Production data unavailable:', prodResponse.status);
+                        console.log('Continuing with test data visualization');
                     }
                 } catch (error) {
-                    console.error('Failed to load production data:', error);
-                    showError('Using test data visualization - production data unavailable');
+                    console.warn('Error loading production data:', error.message);
+                    console.log('Continuing with test data visualization');
                 }
             } catch (error) {
-                showError(`Failed to load data: ${error.message}`);
-                console.error('Load error:', error);
+                showError(`Failed to load or process data: ${error.message}`);
+                console.error('Error:', error);
             }
         }
 
