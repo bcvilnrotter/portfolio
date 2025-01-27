@@ -186,7 +186,7 @@ permalink: /journey/
             document.body.appendChild(errorDiv);
             console.error(message);
         }
-
+      
         function showLoading() {
             const loadingDiv = document.createElement('div');
             loadingDiv.id = 'loading-indicator';
