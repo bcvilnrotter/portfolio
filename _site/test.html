@@ -1,14 +1,9 @@
----
-layout: default
-title: "My Journey"
-permalink: /journey/
----
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Tracking Charts</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
@@ -151,30 +146,26 @@ permalink: /journey/
 </head>
 <body>
     <div class="container">
-        <h1 class="title">My Journey</h1>
-        <p class="subtitle">Tracking My Progress in Data Science & Machine Learning</p>
+        <h1 class="title">Application Tracking Charts</h1>
+        <p class="subtitle">Testing Data Visualization</p>
         
         <div class="card">
-            <p>This page visualizes my journey transitioning into Data Science, tracking application metrics and progress over time. The graphs below show various aspects of my job search process, from daily activities to cumulative progress and success rates.</p>
+            <p>This page tests the visualization of application tracking data, ensuring graphs render correctly with sample data before implementing with real data.</p>
         </div>
 
-        <!-- Application Activity Overview -->
-        <div class="chart-container">
-            <h2>Application Activity Overview</h2>
-            <canvas id="activityChart"></canvas>
-        </div>
+    <div class="chart-container">
+        <h2>Application Activity Overview</h2>
+        <canvas id="activityChart"></canvas>
+    </div>
 
-        <!-- Application Success Pipeline -->
-        <div class="chart-container">
-            <h2>Application Pipeline</h2>
-            <canvas id="pipelineChart"></canvas>
-        </div>
+    <div class="chart-container">
+        <h2>Application Pipeline</h2>
+        <canvas id="pipelineChart"></canvas>
+    </div>
 
-        <!-- Weekly Response Rate -->
-        <div class="chart-container">
-            <h2>Weekly Response Rate</h2>
-            <canvas id="responseChart"></canvas>
-        </div>
+    <div class="chart-container">
+        <h2>Weekly Response Rate</h2>
+        <canvas id="responseChart"></canvas>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
@@ -187,78 +178,22 @@ permalink: /journey/
             console.error(message);
         }
 
-        function showLoading() {
-            const loadingDiv = document.createElement('div');
-            loadingDiv.id = 'loading-indicator';
-            loadingDiv.style.cssText = `
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background: var(--card-background);
-                padding: 2rem;
-                border-radius: 10px;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-                z-index: 1000;
-                text-align: center;
-            `;
-            loadingDiv.innerHTML = `
-                <div style="margin-bottom: 1rem;">Loading and processing data...</div>
-                <div class="progress-info" style="color: var(--secondary-color);"></div>
-            `;
-            document.body.appendChild(loadingDiv);
-            return loadingDiv;
-        }
-
-        function updateLoadingProgress(message) {
-            const progressInfo = document.querySelector('.progress-info');
-            if (progressInfo) {
-                progressInfo.textContent = message;
-            }
-        }
-
-        function hideLoading() {
-            const loadingDiv = document.getElementById('loading-indicator');
-            if (loadingDiv) {
-                loadingDiv.remove();
-            }
-        }
-
-        document.addEventListener("DOMContentLoaded", async function() {
-            const loadingIndicator = showLoading();
+        document.addEventListener("DOMContentLoaded", function() {
             try {
-                console.time('Data Loading');
-                updateLoadingProgress('Loading data...');
-                let rawData = {{ site.data.email_trends | jsonify }};
-                console.timeEnd('Data Loading');
-                updateLoadingProgress('Data loaded successfully');
-
-                if (!rawData) {
-                    throw new Error('Email trends data is not available');
-                }
-                if (!Array.isArray(rawData)) {
-                    throw new Error('Invalid data format');
-                }
-                console.log('Raw data loaded:', rawData.length, 'entries');
-
-                // Performance optimization: Process data in chunks
-                const CHUNK_SIZE = 1000;
-                updateLoadingProgress('Processing data in chunks...');
-                const processDataInChunks = (inputData, chunkSize, processor) => {
-                    console.time('Data Processing');
-                    let result = [];
-                    for (let i = 0; i < inputData.length; i += chunkSize) {
-                        const chunk = inputData.slice(i, i + chunkSize);
-                        result = result.concat(processor(chunk));
-                        if (i > 0 && i % (chunkSize * 10) === 0) {
-                            console.log(`Processed ${i} entries...`);
-                        }
-                    }
-                    console.timeEnd('Data Processing');
-                    updateLoadingProgress('Data processing complete');
-                    return result;
-                };
-
+                let data = [
+    {"sent_time":"2024-12-01T10:00:00.000-05:00","relation_id":"received"},
+    {"sent_time":"2024-12-01T11:00:00.000-05:00","relation_id":"interview"},
+    {"sent_time":"2024-12-01T12:00:00.000-05:00","relation_id":"offer"},
+    {"sent_time":"2024-12-01T13:00:00.000-05:00","relation_id":"rejected"},
+    {"sent_time":"2024-12-02T10:00:00.000-05:00","relation_id":"Job Application Response"},
+    {"sent_time":"2024-12-02T11:00:00.000-05:00","relation_id":"Interview Invitation"},
+    {"sent_time":"2024-12-02T12:00:00.000-05:00","relation_id":"Job Offer"},
+    {"sent_time":"2024-12-02T13:00:00.000-05:00","relation_id":"Application Rejected"},
+    {"sent_time":"2024-12-03T10:00:00.000-05:00","relation_id":"No Email Trend"},
+    {"sent_time":"2024-12-03T11:00:00.000-05:00","relation_id":"Job Application Confirmation"},
+    {"sent_time":"2024-12-03T12:00:00.000-05:00","relation_id":"Interview Scheduled"},
+    {"sent_time":"2024-12-03T13:00:00.000-05:00","relation_id":"Rejection Notice"}
+];
                 const colors = {
                     received: 'rgba(75,192,192,0.6)',    // Teal
                     rejected: 'rgba(255,99,132,0.6)',    // Red
@@ -297,69 +232,33 @@ permalink: /journey/
                 }
 
                 // Pre-process data to remove uncategorized items
-                const processChunk = (chunk) => {
-                    return chunk.filter(item => {
-                        const category = categorizeRelation(item.relation_id);
-                        return category !== null;
-                    });
-                };
-
-                const processedData = processDataInChunks(rawData, CHUNK_SIZE, processChunk);
+                const processedData = data.filter(item => {
+                    const category = categorizeRelation(item.relation_id);
+                    return category !== null;
+                });
                 console.log('Processed data:', processedData.length, 'entries');
 
-                // Memory optimization: Clear original data
-                rawData = null;
-
-                // Performance optimization: Calculate dates efficiently
-                console.time('Date Processing');
-                const dateSet = new Set();
-                for (const item of processedData) {
-                    dateSet.add(item.sent_time.split('T')[0]);
-                }
-                const dates = Array.from(dateSet).sort();
-                console.timeEnd('Date Processing');
+                // Get unique dates from processed data
+                const dates = [...new Set(processedData.map(item => item.sent_time.split('T')[0]))].sort();
                 console.log('Date range:', dates[0], 'to', dates[dates.length - 1]);
 
                 const relations = ['received', 'interview', 'offer', 'rejected'];
 
-                // Performance optimization: Pre-calculate date indices
-                console.time('Chart Data Preparation');
-                const dateIndex = new Map(dates.map((date, index) => [date, index]));
-                const relationCounts = relations.map(relation => new Array(dates.length).fill(0));
-
-                // Single pass through data for all charts
-                for (const item of processedData) {
-                    const date = item.sent_time.split('T')[0];
-                    const dateIdx = dateIndex.get(date);
-                    const category = categorizeRelation(item.relation_id);
-                    if (category !== null) {
-                        const relationIdx = relations.indexOf(category);
-                        if (relationIdx !== -1) {
-                            relationCounts[relationIdx][dateIdx]++;
-                        }
-                    }
-                }
-                console.timeEnd('Chart Data Preparation');
-
-                // Initialize chart contexts
-                console.time('Chart Rendering');
-                const activityCtx = document.getElementById('activityChart')?.getContext('2d');
-                const pipelineCtx = document.getElementById('pipelineChart')?.getContext('2d');
-                const responseCtx = document.getElementById('responseChart')?.getContext('2d');
-
-                if (!activityCtx || !pipelineCtx || !responseCtx) {
-                    throw new Error('Could not initialize chart contexts. Please check if all canvas elements exist.');
-                }
-
-                // Activity Chart with pre-calculated data
+                // Activity Chart
+                const activityCtx = document.getElementById('activityChart').getContext('2d');
                 new Chart(activityCtx, {
                     type: 'bar',
                     data: {
                         labels: dates,
-                        datasets: relations.map((relation, idx) => ({
+                        datasets: relations.map(relation => ({
                             label: relation.charAt(0).toUpperCase() + relation.slice(1),
                             backgroundColor: colors[relation],
-                            data: relationCounts[idx]
+                            data: dates.map(date => 
+                                processedData.filter(item => 
+                                    item.sent_time.startsWith(date) && 
+                                    categorizeRelation(item.relation_id) === relation
+                                ).length
+                            )
                         }))
                     },
                     options: {
@@ -376,12 +275,17 @@ permalink: /journey/
                     }
                 });
 
-                // Pipeline Chart with optimized cumulative calculation
+                // Pipeline Chart
+                const pipelineCtx = document.getElementById('pipelineChart').getContext('2d');
                 const cumulativeData = {};
-                relations.forEach((relation, idx) => {
+                relations.forEach(relation => {
                     let runningTotal = 0;
-                    cumulativeData[relation] = relationCounts[idx].map(count => {
-                        runningTotal += count;
+                    cumulativeData[relation] = dates.map(date => {
+                        const dailyCount = processedData.filter(item => 
+                            item.sent_time.startsWith(date) && 
+                            categorizeRelation(item.relation_id) === relation
+                        ).length;
+                        runningTotal += dailyCount;
                         return runningTotal;
                     });
                 });
@@ -409,34 +313,29 @@ permalink: /journey/
                     }
                 });
 
-                // Response Rate Chart with optimized weekly calculation
-                const weeklyData = new Map();
-                for (const item of processedData) {
+                // Response Rate Chart
+                const responseCtx = document.getElementById('responseChart').getContext('2d');
+                const weeklyData = {};
+                processedData.forEach(item => {
                     const date = new Date(item.sent_time);
                     const week = `${date.getFullYear()}-W${Math.ceil((date.getDate() + date.getDay()) / 7)}`;
                     const category = categorizeRelation(item.relation_id);
                     
-                    if (!weeklyData.has(week)) {
-                        weeklyData.set(week, { total: 0, positive: 0 });
+                    if (!weeklyData[week]) {
+                        weeklyData[week] = { total: 0, positive: 0 };
                     }
-                    const weekStats = weeklyData.get(week);
-                    weekStats.total++;
+                    weeklyData[week].total++;
                     if (category === 'interview' || category === 'offer') {
-                        weekStats.positive++;
+                        weeklyData[week].positive++;
                     }
-                }
+                });
 
-                const weeks = Array.from(weeklyData.keys()).sort();
+                const weeks = Object.keys(weeklyData).sort();
                 const responseRate = weeks.map(week => {
-                    const stats = weeklyData.get(week);
-                    const rate = (stats.positive / stats.total) * 100;
-                    if (stats.total >= 5) { // Only log weeks with significant data
-                        console.log(`Week ${week}: ${rate.toFixed(1)}% (${stats.positive}/${stats.total})`);
-                    }
+                    const rate = (weeklyData[week].positive / weeklyData[week].total) * 100;
+                    console.log(`Week ${week}: ${rate.toFixed(1)}% (${weeklyData[week].positive}/${weeklyData[week].total})`);
                     return rate;
                 });
-                console.timeEnd('Chart Rendering');
-                hideLoading();
 
                 new Chart(responseCtx, {
                     type: 'line',
@@ -467,15 +366,10 @@ permalink: /journey/
                         }
                     }
                 });
-            } catch (error) {
-                hideLoading();
-                showError(`Failed to load or process data: ${error.message}`);
-                console.error('Detailed error:', error);
-            }
+                    } catch (error) {
+                        showError(`Failed to load or process data: ${error.message}`);
+                    }
         });
     </script>
-    <footer style="text-align: center; padding: 1rem; color: var(--text-color); opacity: 0.8; font-size: 0.9rem; position: fixed; bottom: 0; width: 100%; background: linear-gradient(to bottom, transparent, var(--background-color) 20%); backdrop-filter: blur(5px); border-top: 1px solid rgba(0,0,0,0.1);">
-        Page designed and generated by Cline AI Assistant
-    </footer>
 </body>
 </html>
