@@ -76,36 +76,6 @@
         "last_updated": "2025-01-09T18:49:58+00:00"
     },
     {
-        "id": "kaggle-notebook-brianvilnrotter/cyber-security-attacks",
-        "title": "Cyber Security Attacks",
-        "description": "A data science project exploring cybersecurity using Python.",
-        "technologies": [
-            "Python",
-            "Cybersecurity",
-            "Kaggle"
-        ],
-        "github_url": "",
-        "live_url": "https://www.kaggle.com/brianvilnrotter/cyber-security-attacks",
-        "source": "kaggle",
-        "featured": true,
-        "last_updated": "2024-12-18T01:55:20+00:00"
-    },
-    {
-        "id": "kaggle-notebook-brianvilnrotter/cybersecurity-suspicious-web-threat-interactions",
-        "title": "Cybersecurity: Suspicious Web Threat Interactions",
-        "description": "A data science project exploring cybersecurity using Python.",
-        "technologies": [
-            "Python",
-            "Cybersecurity",
-            "Kaggle"
-        ],
-        "github_url": "",
-        "live_url": "https://www.kaggle.com/brianvilnrotter/cybersecurity-suspicious-web-threat-interactions",
-        "source": "kaggle",
-        "featured": true,
-        "last_updated": "2024-12-18T00:45:22+00:00"
-    },
-    {
         "id": "kaggle-notebook-brianvilnrotter/titanic-machine-learning-from-disaster",
         "title": "Titanic - Machine Learning from Disaster",
         "description": "A data science project exploring machine learning using Python.",
@@ -198,20 +168,5 @@
         "source": "kaggle",
         "featured": true,
         "last_updated": "2024-10-25T01:47:59+00:00"
-    },
-    {
-        "id": "kaggle-notebook-brianvilnrotter/dive-into-dplyr-tutorial-1",
-        "title": "Dive into dplyr (tutorial #1)",
-        "description": "A data science project exploring r using Python.",
-        "technologies": [
-            "Python",
-            "R",
-            "Kaggle"
-        ],
-        "github_url": "",
-        "live_url": "https://www.kaggle.com/brianvilnrotter/dive-into-dplyr-tutorial-1",
-        "source": "kaggle",
-        "featured": true,
-        "last_updated": "2024-10-04T18:45:11+00:00"
     }
 ]
