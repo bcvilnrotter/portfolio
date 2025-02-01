@@ -32,6 +32,12 @@ jobs:
               run: |
                 python scripts/sync_notion_projects.py
 
+            - name: Run Kaggle projects sync
+              env:
+                KAGGLE_API: ${{ secrets.KAGGLE_API }}
+              run: |
+                python scripts/sync_kaggle_projects.py
+
             - name: Commit and push changes
               run: |
                 git config --global user.name 'GitHub Actions'

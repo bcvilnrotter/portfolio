@@ -1,4 +1,22 @@
 title: Brian Vilnrotter | Incident response Analyst & Aspiring Data Scientist in Machine Learning
 description: "Leveraging a decades worth of experience as an incident response analyst with a focus on transitioning into data science and machine learning."
 baseurl: ""
+url: "http://localhost:4000"
 data_dir: _data
+
+# Build settings
+markdown: kramdown
+exclude: [
+  "Gemfile",
+  "Gemfile.lock",
+  "node_modules",
+  "vendor",
+  "scripts",
+  "README.md"
+]
+
+# Collections
+collections:
+  projects:
+    output: true
+    permalink: /projects/:path/

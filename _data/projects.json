@@ -8,10 +8,210 @@
             "AI Testing",
             "HuggingFace App Hosting"
         ],
-        "image_url": "",
+        "github_url": "",
         "supporting_url": "https://www.kaggle.com/datasets/deepcontractor/mars-rover-environmental-monitoring-station",
         "live_url": "https://huggingface.co/spaces/bcvilnrotter/mars-pressure-predictor",
         "featured": false,
-        "last_updated": "2025-02-01T01:53:00.000Z"
+        "last_updated": "2025-02-01T01:53:00.000Z",
+        "source": "notion"
+    },
+    {
+        "id": "kaggle-notebook-brianvilnrotter/anxiety-attack-factors-symptoms-and-severity",
+        "title": "Anxiety Attack: Factors, Symptoms, and Severity",
+        "description": "A data science project exploring healthcare analytics using Python.",
+        "technologies": [
+            "Python",
+            "Healthcare Analytics",
+            "Kaggle"
+        ],
+        "github_url": "",
+        "live_url": "https://www.kaggle.com/brianvilnrotter/anxiety-attack-factors-symptoms-and-severity",
+        "source": "kaggle",
+        "featured": true,
+        "last_updated": "2025-01-28T16:46:01+00:00"
+    },
+    {
+        "id": "kaggle-notebook-brianvilnrotter/forecasting-sticker-sales",
+        "title": "Forecasting Sticker Sales",
+        "description": "A data science project exploring time series analysis using Python.",
+        "technologies": [
+            "Python",
+            "Time Series Analysis",
+            "Kaggle"
+        ],
+        "github_url": "",
+        "live_url": "https://www.kaggle.com/brianvilnrotter/forecasting-sticker-sales",
+        "source": "kaggle",
+        "featured": true,
+        "last_updated": "2025-01-19T23:15:21+00:00"
+    },
+    {
+        "id": "kaggle-notebook-brianvilnrotter/panic-attack-dataset",
+        "title": "Panic Attack Dataset",
+        "description": "A data science project exploring healthcare analytics using Python.",
+        "technologies": [
+            "Python",
+            "Healthcare Analytics",
+            "Kaggle"
+        ],
+        "github_url": "",
+        "live_url": "https://www.kaggle.com/brianvilnrotter/panic-attack-dataset",
+        "source": "kaggle",
+        "featured": true,
+        "last_updated": "2025-01-19T19:48:04+00:00"
+    },
+    {
+        "id": "kaggle-notebook-brianvilnrotter/fide-google-efficient-chess-ai-challenge",
+        "title": "FIDE & Google Efficient Chess AI Challenge",
+        "description": "A data science project exploring machine learning using Python.",
+        "technologies": [
+            "Python",
+            "Machine Learning",
+            "Kaggle"
+        ],
+        "github_url": "",
+        "live_url": "https://www.kaggle.com/brianvilnrotter/fide-google-efficient-chess-ai-challenge",
+        "source": "kaggle",
+        "featured": true,
+        "last_updated": "2025-01-09T18:49:58+00:00"
+    },
+    {
+        "id": "kaggle-notebook-brianvilnrotter/cyber-security-attacks",
+        "title": "Cyber Security Attacks",
+        "description": "A data science project exploring cybersecurity using Python.",
+        "technologies": [
+            "Python",
+            "Cybersecurity",
+            "Kaggle"
+        ],
+        "github_url": "",
+        "live_url": "https://www.kaggle.com/brianvilnrotter/cyber-security-attacks",
+        "source": "kaggle",
+        "featured": true,
+        "last_updated": "2024-12-18T01:55:20+00:00"
+    },
+    {
+        "id": "kaggle-notebook-brianvilnrotter/cybersecurity-suspicious-web-threat-interactions",
+        "title": "Cybersecurity: Suspicious Web Threat Interactions",
+        "description": "A data science project exploring cybersecurity using Python.",
+        "technologies": [
+            "Python",
+            "Cybersecurity",
+            "Kaggle"
+        ],
+        "github_url": "",
+        "live_url": "https://www.kaggle.com/brianvilnrotter/cybersecurity-suspicious-web-threat-interactions",
+        "source": "kaggle",
+        "featured": true,
+        "last_updated": "2024-12-18T00:45:22+00:00"
+    },
+    {
+        "id": "kaggle-notebook-brianvilnrotter/titanic-machine-learning-from-disaster",
+        "title": "Titanic - Machine Learning from Disaster",
+        "description": "A data science project exploring machine learning using Python.",
+        "technologies": [
+            "Python",
+            "Machine Learning",
+            "Kaggle"
+        ],
+        "github_url": "",
+        "live_url": "https://www.kaggle.com/brianvilnrotter/titanic-machine-learning-from-disaster",
+        "source": "kaggle",
+        "featured": true,
+        "last_updated": "2024-12-14T00:14:13+00:00"
+    },
+    {
+        "id": "kaggle-notebook-brianvilnrotter/house-prices-advanced-regression-techniques",
+        "title": "House Prices - Advanced Regression Techniques",
+        "description": "A data science project exploring statistical analysis using Python.",
+        "technologies": [
+            "Python",
+            "Statistical Analysis",
+            "Kaggle"
+        ],
+        "github_url": "",
+        "live_url": "https://www.kaggle.com/brianvilnrotter/house-prices-advanced-regression-techniques",
+        "source": "kaggle",
+        "featured": true,
+        "last_updated": "2024-12-13T23:15:41+00:00"
+    },
+    {
+        "id": "kaggle-notebook-brianvilnrotter/ai-mathematical-olympiad-progress-prize-2",
+        "title": "AI Mathematical Olympiad - Progress Prize 2",
+        "description": "A data science project exploring machine learning using Python.",
+        "technologies": [
+            "Python",
+            "Machine Learning",
+            "Kaggle"
+        ],
+        "github_url": "",
+        "live_url": "https://www.kaggle.com/brianvilnrotter/ai-mathematical-olympiad-progress-prize-2",
+        "source": "kaggle",
+        "featured": true,
+        "last_updated": "2024-11-05T01:26:36+00:00"
+    },
+    {
+        "id": "kaggle-notebook-brianvilnrotter/mars-rover-machine-learning-python-practice",
+        "title": "Mars rover machine learning (python practice)",
+        "description": "A data science project exploring machine learning, space science, python using Python.",
+        "technologies": [
+            "Python",
+            "Machine Learning",
+            "Space Science",
+            "Python",
+            "Kaggle"
+        ],
+        "github_url": "",
+        "live_url": "https://www.kaggle.com/brianvilnrotter/mars-rover-machine-learning-python-practice",
+        "source": "kaggle",
+        "featured": true,
+        "last_updated": "2024-10-27T00:11:19+00:00"
+    },
+    {
+        "id": "kaggle-notebook-brianvilnrotter/mars-rover-machine-learning-r-practice",
+        "title": "Mars rover machine learning (R practice)",
+        "description": "A data science project exploring machine learning, space science, r using Python.",
+        "technologies": [
+            "Python",
+            "Machine Learning",
+            "Space Science",
+            "R",
+            "Kaggle"
+        ],
+        "github_url": "",
+        "live_url": "https://www.kaggle.com/brianvilnrotter/mars-rover-machine-learning-r-practice",
+        "source": "kaggle",
+        "featured": true,
+        "last_updated": "2024-10-25T02:47:22+00:00"
+    },
+    {
+        "id": "kaggle-notebook-brianvilnrotter/spaceship-titanic",
+        "title": "Spaceship Titanic",
+        "description": "A data science project exploring data science using Python.",
+        "technologies": [
+            "Python",
+            "Data Science",
+            "Kaggle"
+        ],
+        "github_url": "",
+        "live_url": "https://www.kaggle.com/brianvilnrotter/spaceship-titanic",
+        "source": "kaggle",
+        "featured": true,
+        "last_updated": "2024-10-25T01:47:59+00:00"
+    },
+    {
+        "id": "kaggle-notebook-brianvilnrotter/dive-into-dplyr-tutorial-1",
+        "title": "Dive into dplyr (tutorial #1)",
+        "description": "A data science project exploring r using Python.",
+        "technologies": [
+            "Python",
+            "R",
+            "Kaggle"
+        ],
+        "github_url": "",
+        "live_url": "https://www.kaggle.com/brianvilnrotter/dive-into-dplyr-tutorial-1",
+        "source": "kaggle",
+        "featured": true,
+        "last_updated": "2024-10-04T18:45:11+00:00"
     }
 ]
