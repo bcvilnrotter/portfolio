@@ -1,4 +1,9 @@
+---
+layout: default
+title: "About Me"
+---
 
+{% assign projects = site.data.projects | default: empty_array %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -385,32 +390,28 @@
                     <i class="fas fa-chevron-left"></i>
                 </button>
                 <div class="slider-track">
-                    
+                    {% for project in projects %}
                     <div class="project-card">
-                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=300&h=150&fit=crop" alt="Mars Atmospheric Pressure Predictor">
-                        <h3>Mars Atmospheric Pressure Predictor</h3>
-                        <p>Tested Cline AI Assistant in VSCode to build predictive model and host on huggingface.</p>
+                        <img src="{{ project.image_url | default: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=300&h=150&fit=crop' }}" alt="{{ project.title }}">
+                        <h3>{{ project.title }}</h3>
+                        <p>{{ project.description }}</p>
                         <div class="project-tech">
-                            
-                            <span class="tech-badge">Cline AI Assistant</span>
-                            
-                            <span class="tech-badge">AI Testing</span>
-                            
-                            <span class="tech-badge">HuggingFace App Hosting</span>
-                            
+                            {% for tech in project.technologies %}
+                            <span class="tech-badge">{{ tech }}</span>
+                            {% endfor %}
                         </div>
                         <div class="project-links">
-                            
-                            <a href="https://www.kaggle.com/datasets/deepcontractor/mars-rover-environmental-monitoring-station" target="_blank">Supporting Link</a>
-                            
-                            
-                            <a href="https://huggingface.co/spaces/bcvilnrotter/mars-pressure-predictor" target="_blank">Live Demo</a>
-                            
+                            {% if project.supporting_url != "" %}
+                            <a href="{{ project.supporting_url }}" target="_blank">Supporting Link</a>
+                            {% endif %}
+                            {% if project.live_url != "" %}
+                            <a href="{{ project.live_url }}" target="_blank">Live Demo</a>
+                            {% endif %}
                         </div>
                     </div>
-                    
+                    {% endfor %}
                 </div>
-                <button class="slider-button next" aria-label="Next project" disabled>
+                <button class="slider-button next" aria-label="Next project" {% if projects.size <= 1 %}disabled{% endif %}>
                     <i class="fas fa-chevron-right"></i>
                 </button>
             </div>
@@ -485,4 +486,3 @@
     </script>
 </body>
 </html>
-

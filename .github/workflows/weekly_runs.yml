@@ -22,15 +22,15 @@ jobs:
                 python -m pip install --upgrade pip
                 pip install -r requirements.txt
 
-            - name: Run udate_repos.py
+            - name: Run update_repos.py
               run: python scripts/update_repos.py
 
-            - name: Run update_email_trends scripts
+            - name: Run Notion projects sync
               env:
                 NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
-                NOTION_EMAIL_TRENDS_DBID: ${{ secrets.NOTION_EMAIL_TRENDS_DBID }}
+                NOTION_PROJECTS_DBID: ${{ secrets.NOTION_PROJECTS_DBID }}
               run: |
-                python scripts/update_email_trends.py
+                python scripts/sync_notion_projects.py
 
             - name: Commit and push changes
               run: |
