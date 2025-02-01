@@ -27,20 +27,35 @@ def parse_project(page):
     """Parse a Notion page into a project dictionary."""
     properties = page.get('properties', {})
     
-    return {
+    # Get the title and description
+    title = properties.get('Name', {}).get('title', [{}])[0].get('plain_text', '')
+    description = properties.get('Description', {}).get('rich_text', [{}])[0].get('plain_text', '')
+    
+    # Get technologies as a list
+    technologies = [
+        tag.get('name', '') 
+        for tag in properties.get('Technologies', {}).get('multi_select', [])
+    ]
+    
+    # Get URLs
+    supporting_url = properties.get('Supporting URL', {}).get('url', '')
+    live_url = properties.get('Live Demo URL', {}).get('url', '')
+    
+    # Create project dictionary
+    project = {
         "id": page.get('id'),
-        "title": properties.get('Name', {}).get('title', [{}])[0].get('plain_text', ''),
-        "description": properties.get('Description', {}).get('rich_text', [{}])[0].get('plain_text', ''),
-        "technologies": [
-            tag.get('name', '') 
-            for tag in properties.get('Technologies', {}).get('multi_select', [])
-        ],
-        "image_url": properties.get('Image', {}).get('url', ''),
-        "supporting_url": properties.get('Supporting URL', {}).get('url', ''),
-        "live_url": properties.get('Live Demo URL', {}).get('url', ''),
+        "title": title,
+        "description": description,
+        "technologies": technologies,
+        "github_url": "",  # Keep empty for now as it's not used
+        "supporting_url": supporting_url,  # Add supporting_url as its own field
+        "live_url": live_url,
         "featured": properties.get('Featured', {}).get('checkbox', False),
-        "last_updated": page.get('last_edited_time')
+        "last_updated": page.get('last_edited_time'),
+        "source": "notion"
     }
+    
+    return project
 
 def save_projects(projects):
     """Save projects to the _data directory."""

@@ -361,7 +361,7 @@ title: "About Me"
             </div>
             <div class="skill-card">
                 <h3 class="skill-title">Machine Learning</h3>
-                <p>Actively applying DFIR pattern recognition expertise to machine learning, focusing on anomaly detection and predictive analytics.</p>
+                <p>Using investigative mindset and troubleshooting skillset to find novel solutions for complex data analysis and predictive model building.</p>
             </div>
         </div>
 
@@ -401,11 +401,15 @@ title: "About Me"
                             {% endfor %}
                         </div>
                         <div class="project-links">
-                            {% if project.supporting_url != "" %}
+                            {% if project.source == "kaggle" %}
+                            <a href="{{ project.live_url }}" target="_blank">Notebook</a>
+                            {% else %}
+                            {% if project.supporting_url %}
                             <a href="{{ project.supporting_url }}" target="_blank">Supporting Link</a>
                             {% endif %}
                             {% if project.live_url != "" %}
                             <a href="{{ project.live_url }}" target="_blank">Live Demo</a>
+                            {% endif %}
                             {% endif %}
                         </div>
                     </div>
