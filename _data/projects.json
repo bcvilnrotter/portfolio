@@ -1,5 +1,36 @@
 [
     {
+        "id": "kaggle-notebook-brianvilnrotter/titanic-machine-learning-from-disaster",
+        "title": "Titanic - Machine Learning from Disaster",
+        "description": "A data science project exploring machine learning using Python.",
+        "technologies": [
+            "Python",
+            "Machine Learning",
+            "Kaggle"
+        ],
+        "github_url": "",
+        "live_url": "https://www.kaggle.com/brianvilnrotter/titanic-machine-learning-from-disaster",
+        "source": "kaggle",
+        "featured": true,
+        "last_updated": "2025-02-09T19:17:30+00:00"
+    },
+    {
+        "id": "19486ad8-f534-8011-b70c-c39776ccc79d",
+        "title": "AI Awareness Probe",
+        "description": "A site to check for AI awareness. The hypothesis I'm currently utilizing is as follows. If AI is to be self aware it must conduct self-motivated tasks. The idea is this is a site that should be able to attract AI prompts to query it, but without being initially activated by a human to conduct the task through a prompt.",
+        "technologies": [
+            "Cline AI Assistant",
+            "AI Testing",
+            "AI Consciousness"
+        ],
+        "github_url": "",
+        "supporting_url": "https://github.com/bcvilnrotter/ai-awareness-probe",
+        "live_url": "https://bcvilnrotter.github.io/ai-awareness-probe/",
+        "featured": false,
+        "last_updated": "2025-02-08T04:12:00.000Z",
+        "source": "notion"
+    },
+    {
         "id": "18c86ad8-f534-80b1-88d3-cc6b3d0ee623",
         "title": "Mars Atmospheric Pressure Predictor",
         "description": "Tested Cline AI Assistant in VSCode to build predictive model and host on huggingface.",
@@ -76,19 +107,34 @@
         "last_updated": "2025-01-09T18:49:58+00:00"
     },
     {
-        "id": "kaggle-notebook-brianvilnrotter/titanic-machine-learning-from-disaster",
-        "title": "Titanic - Machine Learning from Disaster",
-        "description": "A data science project exploring machine learning using Python.",
+        "id": "kaggle-notebook-brianvilnrotter/cyber-security-attacks",
+        "title": "Cyber Security Attacks",
+        "description": "A data science project exploring cybersecurity using Python.",
         "technologies": [
             "Python",
-            "Machine Learning",
+            "Cybersecurity",
             "Kaggle"
         ],
         "github_url": "",
-        "live_url": "https://www.kaggle.com/brianvilnrotter/titanic-machine-learning-from-disaster",
+        "live_url": "https://www.kaggle.com/brianvilnrotter/cyber-security-attacks",
         "source": "kaggle",
         "featured": true,
-        "last_updated": "2024-12-14T00:14:13+00:00"
+        "last_updated": "2024-12-18T01:55:20+00:00"
+    },
+    {
+        "id": "kaggle-notebook-brianvilnrotter/cybersecurity-suspicious-web-threat-interactions",
+        "title": "Cybersecurity: Suspicious Web Threat Interactions",
+        "description": "A data science project exploring cybersecurity using Python.",
+        "technologies": [
+            "Python",
+            "Cybersecurity",
+            "Kaggle"
+        ],
+        "github_url": "",
+        "live_url": "https://www.kaggle.com/brianvilnrotter/cybersecurity-suspicious-web-threat-interactions",
+        "source": "kaggle",
+        "featured": true,
+        "last_updated": "2024-12-18T00:45:22+00:00"
     },
     {
         "id": "kaggle-notebook-brianvilnrotter/house-prices-advanced-regression-techniques",
@@ -168,5 +214,20 @@
         "source": "kaggle",
         "featured": true,
         "last_updated": "2024-10-25T01:47:59+00:00"
+    },
+    {
+        "id": "kaggle-notebook-brianvilnrotter/dive-into-dplyr-tutorial-1",
+        "title": "Dive into dplyr (tutorial #1)",
+        "description": "A data science project exploring r using Python.",
+        "technologies": [
+            "Python",
+            "R",
+            "Kaggle"
+        ],
+        "github_url": "",
+        "live_url": "https://www.kaggle.com/brianvilnrotter/dive-into-dplyr-tutorial-1",
+        "source": "kaggle",
+        "featured": true,
+        "last_updated": "2024-10-04T18:45:11+00:00"
     }
 ]
