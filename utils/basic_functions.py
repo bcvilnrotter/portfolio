@@ -11,7 +11,7 @@ def get_secret(secret_key):
 
     # iteration
     value = os.getenv(secret_key)
-    print(['*']*len(value))
+    print("".join(['*']*len(value)))
     if value is None:
         ValueError(f"Secret '{secret_key}' no found.")
 
