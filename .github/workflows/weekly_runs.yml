@@ -28,7 +28,7 @@ jobs:
             - name: Run Notion projects sync
               env:
                 NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
-                NOTION_PROJECTS_DBID: ${{ secrets.NOTION_PROJECTS_DBID }}
+                NOTION_PROJECT_DBID: ${{ secrets.NOTION_PROJECT_DBID }}
               run: |
                 python scripts/sync_notion_projects.py
 
