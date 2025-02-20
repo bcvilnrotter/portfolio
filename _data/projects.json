@@ -1,7 +1,7 @@
 [
     {
         "id": "19886ad8-f534-805a-bf6e-d7c24a2ce55a",
-        "title": "Chanelog LLM",
+        "title": "Changelog LLM",
         "description": "This is an attempt to make an LLM from scratch that has a changelog of the data that the model is trained on. The eventual goal would be to have a model that can facilitates trust in the userbase by showing what exact data was used to train, and if controversy's arise the hope is that data can be unlearned (future possibility)",
         "technologies": [
             "Cline AI Assistant",
@@ -12,7 +12,7 @@
         "supporting_url": "https://github.com/bcvilnrotter/changelog-llm",
         "live_url": "https://huggingface.co/spaces/bcvilnrotter/changelog-chatbot",
         "featured": false,
-        "last_updated": "2025-02-13T03:31:00.000Z",
+        "last_updated": "2025-02-20T21:47:00.000Z",
         "source": "notion"
     },
     {
