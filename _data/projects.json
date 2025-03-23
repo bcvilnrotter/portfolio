@@ -1,5 +1,35 @@
 [
     {
+        "id": "kaggle-notebook-brianvilnrotter/notebook45c4ffedbc",
+        "title": "notebook45c4ffedbc",
+        "description": "A data science project exploring data science using Python.",
+        "technologies": [
+            "Python",
+            "Data Science",
+            "Kaggle"
+        ],
+        "github_url": "",
+        "live_url": "https://www.kaggle.com/brianvilnrotter/notebook45c4ffedbc",
+        "source": "kaggle",
+        "featured": true,
+        "last_updated": "2025-03-21T20:43:57+00:00"
+    },
+    {
+        "id": "kaggle-notebook-brianvilnrotter/cardiogoodfitness",
+        "title": "CardioGoodFitness",
+        "description": "A data science project exploring data science using Python.",
+        "technologies": [
+            "Python",
+            "Data Science",
+            "Kaggle"
+        ],
+        "github_url": "",
+        "live_url": "https://www.kaggle.com/brianvilnrotter/cardiogoodfitness",
+        "source": "kaggle",
+        "featured": true,
+        "last_updated": "2025-03-21T20:25:32+00:00"
+    },
+    {
         "id": "19886ad8-f534-805a-bf6e-d7c24a2ce55a",
         "title": "Changelog LLM",
         "description": "This is an attempt to make an LLM from scratch that has a changelog of the data that the model is trained on. The eventual goal would be to have a model that can facilitates trust in the userbase by showing what exact data was used to train, and if controversy's arise the hope is that data can be unlearned (future possibility)",
