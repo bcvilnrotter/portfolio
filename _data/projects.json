@@ -1,7 +1,22 @@
 [
     {
-        "id": "kaggle-notebook-brianvilnrotter/notebook45c4ffedbc",
-        "title": "notebook45c4ffedbc",
+        "id": "kaggle-notebook-brianvilnrotter/bike-training-data",
+        "title": "Bike Training Data",
+        "description": "A data science project exploring machine learning using Python.",
+        "technologies": [
+            "Python",
+            "Machine Learning",
+            "Kaggle"
+        ],
+        "github_url": "",
+        "live_url": "https://www.kaggle.com/brianvilnrotter/bike-training-data",
+        "source": "kaggle",
+        "featured": true,
+        "last_updated": "2025-03-27T18:42:25+00:00"
+    },
+    {
+        "id": "kaggle-notebook-brianvilnrotter/odi-cricket-matches",
+        "title": "Odi Cricket Matches",
         "description": "A data science project exploring data science using Python.",
         "technologies": [
             "Python",
@@ -9,7 +24,7 @@
             "Kaggle"
         ],
         "github_url": "",
-        "live_url": "https://www.kaggle.com/brianvilnrotter/notebook45c4ffedbc",
+        "live_url": "https://www.kaggle.com/brianvilnrotter/odi-cricket-matches",
         "source": "kaggle",
         "featured": true,
         "last_updated": "2025-03-21T20:43:57+00:00"
