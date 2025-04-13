@@ -1,5 +1,20 @@
 [
     {
+        "id": "kaggle-notebook-brianvilnrotter/personal-video-game-recommender",
+        "title": "Personal Video Game Recommender",
+        "description": "A data science project exploring data science using Python.",
+        "technologies": [
+            "Python",
+            "Data Science",
+            "Kaggle"
+        ],
+        "github_url": "",
+        "live_url": "https://www.kaggle.com/brianvilnrotter/personal-video-game-recommender",
+        "source": "kaggle",
+        "featured": true,
+        "last_updated": "2025-04-08T19:15:32+00:00"
+    },
+    {
         "id": "19886ad8-f534-805a-bf6e-d7c24a2ce55a",
         "title": "Changelog LLM",
         "description": "This is an attempt to make an LLM from scratch that has a changelog of the data that the model is trained on. The eventual goal would be to have a model that can facilitates trust in the userbase by showing what exact data was used to train, and if controversy's arise the hope is that data can be unlearned (future possibility)",
